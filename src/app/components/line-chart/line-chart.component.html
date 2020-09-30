@@ -1,0 +1,38 @@
+<div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Route
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div *ngFor="let routeName of routeNames">
+                <a class="dropdown-item" (click)="showRoute(routeName)">{{routeName}}</a>
+            </div>
+        </div>
+      </div>
+
+    <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="selectedRoute"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+    >
+        <ng-template #tooltipTemplate let-model="model">
+                <div class="tooltip white-text">Request Number: {{model["name"]}}</div>
+                <div class="tooltip white-text">HTTP Method: {{model["series"]}}</div>
+                <div class="tooltip white-text">HTTP Status: {{model["HTTP Status"]}}</div>
+                <div class="tooltip white-text">Response Time: {{model["value"]}}</div>
+        </ng-template>
+</ngx-charts-line-chart>
+
+   
+</div>
