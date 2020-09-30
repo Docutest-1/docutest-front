@@ -8,10 +8,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
-  private Base_Url = "http://localhost:8080/upload";
+  private Base_Url = "http://localhost:8080/";
   public uploadForm: FormGroup;
+  private formData = new FormData();
 
-  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
@@ -21,17 +22,22 @@ export class FileUploadComponent implements OnInit {
 
   onFileSelect(event) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      let file = event.target.files[0];
       this.uploadForm.get('swaggerFile').setValue(file);
     }
   }
 
   onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('swaggerFile').value);
-    this.httpClient.post<any>(this.Base_Url, formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    );
+    this.formData.append('file', this.uploadForm.get('swaggerFile').value);
+    try {
+      let results = this.http.post<any>(this.Base_Url + 'upload',
+        {
+          file: this.formData,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      alert('Failed to upload');
+    }
   }
 }
