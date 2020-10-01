@@ -1,7 +1,7 @@
 <!-- Table for Success and Failures start-->
 <table class="table">
   <!--Accessible to visually impaired users-->
-  <caption>
+  <caption hidden>
     Successes and Failures
   </caption>
   <thead class="thead-dark">
@@ -11,15 +11,17 @@
       <th scope="col">Failures</th>
       <th scope="col">Successes</th>
       <th scope="col">Success rate</th>
+      <th scope="col">Request per second</th>
     </tr>
     <!--Table columns end -->
   </thead>
   <tbody>
     <tr>
       <th scope="row"></th>
-      <td>10 (dummy data)</td>
-      <td>20 (dummy data)</td>
-      <td>40% (dummy data)</td>
+      <td>{{ data.failCount }}</td>
+      <td>{{ successes }}</td>
+      <td>{{ data.successFailPercentage }}%</td>
+      <td>{{ data.reqPerSec }}</td>
     </tr>
   </tbody>
 </table>
