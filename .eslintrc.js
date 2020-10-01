@@ -33,6 +33,7 @@ module.exports = {
         '@typescript-eslint/no-shadow': 'off',
         '@typescript-eslint/import-named': 'off',
         "import/prefer-default-export": "off",
+        "prefer-destructuring": ["error",  {"object": true, "array": false }],
         "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")]
       },
     },
@@ -45,7 +46,7 @@ module.exports = {
       extends: ['plugin:jasmine/recommended'],
       // Plugin to run Jasmine rules
       plugins: ['jasmine'],
-      env: { jasmine: true },
+      env: { jasmine: true, browser: true },
       // Turn off 'no-unused-vars' rule
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',

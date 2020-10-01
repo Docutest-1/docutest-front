@@ -28,6 +28,7 @@
     "@ngxs/store": "^3.7.0",
     "@swimlane/ngx-charts": "^16.0.0",
     "ngx-papaparse": "^5.0.0",
+    "js-yaml": "^3.14.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

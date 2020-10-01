@@ -4,24 +4,11 @@
       <input type="email" class="form-control" placeholder="Search endpoints">
     </div>
   </form>
-  <div class="endpoints">
-    <div class="text-white px-3 py-2 cursor-pointer">
-      <h4>GET</h4>
-      <h6 class="pl-4 my-3 route-link" (click)="displayAddRemoveBtns(1)">/route1</h6>
-      <div class="add-remove-btns ml-5">
-        <button class="btn btn-sm btn-outline-dark mr-3" (click)="clickEndPoint('/route1')">Add</button>
-        <button class="btn btn-sm btn-outline-dark">Remove</button>
+  <div class="endpoints text-white">
+    <div *ngFor="let path of paths">
+      <div>
+        <h6>{{path}}</h6>
       </div>
-      <h6 class="pl-4 my-3 route-link" (click)="displayAddRemoveBtns(2)">/route2</h6>
-      <div class="add-remove-btns ml-5">
-        <button class="btn btn-sm btn-outline-dark mr-3" (click)="clickEndPoint('/route2')">Add</button>
-        <button class="btn btn-sm btn-outline-dark">Remove</button>
-      </div>
-      <h6 class="pl-4 my-3 route-link" (click)="displayAddRemoveBtns(3)">/route3</h6>
-      <div class="add-remove-btns ml-5">
-        <button class="btn btn-sm btn-outline-dark mr-3" (click)="clickEndPoint('/route3')">Add</button>
-        <button class="btn btn-sm btn-outline-dark">Remove</button>
-      </div>
-    </div>
+    </div> 
   </div>
 </div>

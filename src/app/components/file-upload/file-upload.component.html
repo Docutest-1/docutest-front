@@ -2,12 +2,17 @@
     <div class="child">
         <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
             <div>
-                <input class="file-input" type="file" accept=".yaml,.json" name="swaggerFile"
+                <input #fileIn class="file-input" type="file" accept=".yml, .yaml,.json" name="swaggerFile"
                     (change)="onFileSelect($event)" />
             </div>
             <div>
                 <button class="btn btn-primary" type="submit">Upload</button>
             </div>
         </form>
+    </div>
+</div>
+<div class="center">
+    <div *ngIf = "show" class="alert alert-danger text-center" role="alert">
+        {{ errorMsg }}
     </div>
 </div>
