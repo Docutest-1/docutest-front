@@ -12,5 +12,13 @@
 }
 
 .chart {
-    margin-left: 350px;
+    // margin-left: 350px;
+}
+
+
+.chart-container {
+    display: flex;
+    min-height: 25em;
+    max-width: 80%;
+    align-self: center;
 }
