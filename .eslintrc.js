@@ -32,6 +32,7 @@ module.exports = {
           '@typescript-eslint/no-redeclare': 'off',
           '@typescript-eslint/no-shadow': 'off',
           '@typescript-eslint/import-named': 'off',
+          "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")]
         },
       },
     ],
