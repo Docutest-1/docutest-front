@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
 import { Component } from '@angular/core';
-import multi from '../../data';
+import { multi } from '../../data';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss']
 })
-export default class LineChartComponent {
+export class LineChartComponent {
   multi;
 
   routeNames: any[];

@@ -1,4 +1,4 @@
-export default class HttpTableData {
+export class HttpTableData {
   public uri: string;
 
   public httpMethod: string;
@@ -21,6 +21,7 @@ export default class HttpTableData {
 
   public dataReference: string;
 
+  constructor();
   constructor(
     uri: string,
     httpMethod: string,
@@ -33,6 +34,19 @@ export default class HttpTableData {
     successFailPercentage: number,
     reqPerSec: number,
     dataReference: string
+  );
+  constructor(
+    uri?: string,
+    httpMethod?: string,
+    responseAvg?: number,
+    response25Percentile?: number,
+    response50Percentile?: number,
+    response75Percentile?: number,
+    responseMax?: number,
+    failCount?: number,
+    successFailPercentage?: number,
+    reqPerSec?: number,
+    dataReference?: string
   ) {
     this.uri = uri;
     this.httpMethod = httpMethod;

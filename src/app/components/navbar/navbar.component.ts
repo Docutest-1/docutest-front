@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export default class NavbarComponent {
+export class NavbarComponent {
 }

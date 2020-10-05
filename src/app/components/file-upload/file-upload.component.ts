@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
 })
-export default class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit {
   private baseUrl = 'http://localhost:8083/Docutest';
 
   public uploadForm: FormGroup;

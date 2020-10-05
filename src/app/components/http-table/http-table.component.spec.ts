@@ -8,9 +8,9 @@ describe('HttpTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HttpTableComponent ]
+      declarations: [HttpTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

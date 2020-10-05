@@ -8,7 +8,7 @@ import { GraphRoute } from '../../state/graph-route/graph-route.model';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export default class DropdownComponent {
+export class DropdownComponent {
   graphRoute$: Observable<GraphRoute>;
 
   constructor(private store: Store<{graphRoute: GraphRoute}>) {

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import CsvParserService from '../../services/csv-parser.service';
+import { CsvParserService } from '../../services/csv-parser.service';
 
 @Component({
   selector: 'app-temp-file-upload',
   templateUrl: './temp-file-upload.component.html',
   styleUrls: ['./temp-file-upload.component.scss']
 })
-export default class TempFileUploadComponent implements OnInit {
+export class TempFileUploadComponent implements OnInit {
   private baseUrl = 'http://localhost:8083/Docutest';
 
   public uploadForm: FormGroup;

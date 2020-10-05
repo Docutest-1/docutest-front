@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import data from '../../sampleData';
-import HttpTableData from '../../models/http-table-data';
+import { data } from '../../sampleData';
+import { HttpTableData } from '../../models/http-table-data';
 
 @Component({
   selector: 'app-http-table',
   templateUrl: './http-table.component.html',
   styleUrls: ['./http-table.component.scss'],
 })
-export default class HttpTableComponent {
+export class HttpTableComponent {
   data: HttpTableData;
 
   successes: number;

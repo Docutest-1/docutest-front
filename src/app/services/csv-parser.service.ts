@@ -8,7 +8,7 @@ import { ADD_DATA } from '../state/graph-data/graph-data.actions';
 @Injectable({
   providedIn: 'root',
 })
-export default class CsvParserService {
+export class CsvParserService {
   editedResults = [];
 
   constructor(private papa: Papa, private store: Store) {}

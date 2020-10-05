@@ -1,6 +1,1 @@
 src/polyfills.ts
-src/response.ts
-src/**/*.component.spec.ts
-src/**/**/*.component.spec.ts
-src/**/*.spec.ts
-src/**/**/*.spec.ts

@@ -6,16 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import FileUploadComponent from './components/file-upload/file-upload.component';
-import AppRoutingModule from './app-routing.module';
-import AppComponent from './app.component';
-import NavbarComponent from './components/navbar/navbar.component';
-import DashboardComponent from './pages/dashboard/dashboard.component';
-import LineChartComponent from './components/line-chart/line-chart.component';
-import LeftColumnComponent from './components/left-column/left-column.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { LeftColumnComponent } from './components/left-column/left-column.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
-
-import HttpTableComponent from './components/http-table/http-table.component';
+import { HttpTableComponent } from './components/http-table/http-table.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,7 @@ import HttpTableComponent from './components/http-table/http-table.component';
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 // eslint-disable-next-line import/prefer-default-export
 export class AppModule {}

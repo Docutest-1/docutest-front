@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './left-column.component.html',
   styleUrls: ['./left-column.component.scss']
 })
-export default class LeftColumnComponent implements OnInit {
+export class LeftColumnComponent implements OnInit {
   arr;
 
   arr2;

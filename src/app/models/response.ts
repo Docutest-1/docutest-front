@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-class Response {
+export class Response {
   routesArray: Routes[];
 }
 
@@ -10,5 +10,3 @@ class Routes {
 class HTTPResponse {
 
 }
-
-export default Response;

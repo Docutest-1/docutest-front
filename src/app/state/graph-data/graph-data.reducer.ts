@@ -9,6 +9,6 @@ const graphDataReducer = createReducer(
   on(GraphDataActions.ADD_DATA, (state, { graphData }) => [...state, graphData])
 );
 
-export default function reducer(state: GraphData[] | undefined, action: Action) {
+export function reducer(state: GraphData[] | undefined, action: Action) {
   return graphDataReducer(state, action);
 }
