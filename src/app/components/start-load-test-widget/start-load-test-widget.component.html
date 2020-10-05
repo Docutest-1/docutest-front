@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="child">
+        <p>file that you upload here?</p>
+        <button class="btn btn-primary" type="button" (click)="startTest()">Start Load Test</button>
+        <button class="btn btn-primary" type="button" (click)="showAdvance()">Advance Options</button>
+    </div>
+    <div class="child" *ngIf="advance">
+        <form [formGroup]="AdvanceForm">
+            <mat-form-field>
+                <mat-label>Test plan name: </mat-label>
+                <input matInput type="text" id="planName" value="" formControlName="planName" /><br />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Number of Loops: </mat-label>
+                <input matInput type="number" id="loops" min=0 formControlName="loops" /><br />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Duration : </mat-label>
+                <input matInput type="number" id="duration" min=0 formControlName="duration" /><br />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Number of threads </mat-label>
+                <input matInput type="number" id="thread" min=0 formControlName="thread" /><br />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Number of rampUp: </mat-label>
+                <input matInput type="number" id="rampUp" min=0 formControlName="rampUp" /><br />
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="row">
+        <mat-spinner *ngIf="running"></mat-spinner>
+        <mat-progress-bar mode="buffer" *ngIf="running"></mat-progress-bar>
+        <p *ngIf="running">Seconds since timer started : {{time}} </p>
+    </div>
+</div>
