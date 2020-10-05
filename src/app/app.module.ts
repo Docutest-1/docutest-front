@@ -14,6 +14,7 @@ import DashboardComponent from './pages/dashboard/dashboard.component';
 import LineChartComponent from './components/line-chart/line-chart.component';
 import LeftColumnComponent from './components/left-column/left-column.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
+import StartLoadTestWidget from './components/start-load-test-widget/start-load-test-widget.component';
 
 import HttpTableComponent from './components/http-table/http-table.component';
 
@@ -26,6 +27,7 @@ import HttpTableComponent from './components/http-table/http-table.component';
     FileUploadComponent,
     LeftColumnComponent,
     HttpTableComponent,
+    StartLoadTestWidget
   ],
   imports: [
     ReactiveFormsModule,

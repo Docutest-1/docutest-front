@@ -1,9 +1,9 @@
 <nav class="navbar bg-dark bg-light custom">
-  <a class="navbar-brand" href="/landing">
-    <div class="box">
-      <h2 id="title-button" class="inner-text">Docutest</h2>
-    </div>
-  </a>
+    <a class="navbar-brand" href="/landing">
+      <div class="box">
+        <h2 id="title-button" class="inner-text">Docutest</h2>
+      </div>
+    </a>
   <div class="dropdown">
     <button
       class="btn btn-secondary dropdown-toggle"
@@ -11,12 +11,45 @@
       id="dropdownMenuButton"
       data-toggle="dropdown"
       aria-haspopup="true"
-      aria-expanded="false"
-    >
-      Click Me
+      aria-expanded="false">
+      Actions
     </button>
+
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" data-toggle="modal" data-target="#modal1">Upload</a>
       <a class="dropdown-item" [routerLink]="['/widget']">Run Test</a>
+      <a class="dropdown-item" data-toggle="modal" data-target="#modal2">Start-Test-Load</a>
+
     </div>
   </div>
+
+  <!--Modal code -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Upload</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class ="modal-body">
+        <app-file-upload></app-file-upload>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal code -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Start-Test-Load</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class ="modal-body">
+        <app-start-load-test-widget></app-start-load-test-widget>
+      </div>
+    </div>
+  </div>
+</div>
 </nav>
