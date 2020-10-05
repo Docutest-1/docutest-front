@@ -36,4 +36,21 @@ module.exports = {
         },
       },
     ],
+    overrides: [
+      {
+        files: ['src/**/*.spec.ts', 'src/**/*.d.ts'],
+        parserOptions: {
+          project: './src/tsconfig.spec.json',
+        },
+        // Jasmine rules
+        extends: ['plugin:jasmine/recommended'],
+        // Plugin to run Jasmine rules
+        plugins: ['jasmine'],
+        env: { jasmine: true },
+        // Turn off 'no-unused-vars' rule
+        rules: {
+          '@typescript-eslint/no-unused-vars': 'off',
+        },
+      }
+    ],
 };
