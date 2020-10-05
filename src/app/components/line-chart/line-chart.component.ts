@@ -52,19 +52,6 @@ export default class LineChartComponent {
     }
   }
 
-  // constructor() {
-  //   this.routeNames = new Array();
-
-  //   Object.assign(this, {multi});
-
-  //   for(const [key, value] of Object.entries(this.multi)){
-  //     this.routeNames.push(key);
-  //   }
-
-  //   this.selectedRoute = this.multi[0]
-
-  // }
-
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
@@ -77,7 +64,7 @@ export default class LineChartComponent {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
-  showRoute(routeName) {
+  showRoute(routeName): void {
     this.selectedRoute = this.multi[routeName];
   }
 }

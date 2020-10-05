@@ -31,7 +31,7 @@ module.exports = {
           '@typescript-eslint/no-loop-func': 'off',
           '@typescript-eslint/no-redeclare': 'off',
           '@typescript-eslint/no-shadow': 'off',
-          '@typescript-eslint/import-named': 'off'
+          '@typescript-eslint/import-named': 'off',
         },
       },
     ],

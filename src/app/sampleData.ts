@@ -1,6 +1,6 @@
-import { HttpTableData } from './models/http-table-data';
+import HttpTableData from './models/http-table-data';
 
-export const data: HttpTableData = {
+const data: HttpTableData = {
   uri: 'google.com/whateverpath',
   httpMethod: 'GET',
   responseAvg: 16,
@@ -13,3 +13,5 @@ export const data: HttpTableData = {
   reqPerSec: 533.6,
   dataReference: 's3.fake-aws-website.com/yourdata.csv',
 };
+
+export default data;

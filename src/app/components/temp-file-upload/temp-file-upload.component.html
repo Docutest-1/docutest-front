@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="child">
+        <form [formGroup]="uploadForm">
+            <div>
+                <input class="file-input" type="file" accept=".csv" name="csvFile"
+                    (change)="onFileSelect($event)" />
+            </div>
+            <div>
+                <button class="btn btn-primary" type="button" (click)="logger()">Upload</button>
+            </div>
+        </form>
+    </div>
+</div>

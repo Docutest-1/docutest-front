@@ -1,14 +1,24 @@
-export class HttpTableData {
+export default class HttpTableData {
   public uri: string;
+
   public httpMethod: string;
+
   public responseAvg: number;
+
   public response25Percentile: number;
+
   public response50Percentile: number;
+
   public response75Percentile: number;
+
   public responseMax: number;
+
   public failCount: number;
+
   public successFailPercentage: number;
+
   public reqPerSec: number;
+
   public dataReference: string;
 
   constructor(
