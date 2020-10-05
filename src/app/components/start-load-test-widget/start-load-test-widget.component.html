@@ -29,4 +29,17 @@
       </mat-form-field>
     </form>
   </div>
+  <div *ngIf="running">
+    <h3>Load Test Settings</h3>
+    <p *ngIf="advance">Test Plan Name : {{ LFC.testPlanName }}</p>
+    <p>Number of Loops : {{ LFC.loops }} Loops</p>
+    <p>Duration of tests : {{ LFC.durations }} seconds</p>
+    <p>Number of threads : {{ LFC.threads }} threads</p>
+    <p>number of ramp ups : {{ LFC.rampUp }} ramps</p>
+  </div>
+  <div class="center">
+    <div *ngIf="MsgShow" class="alert alert-success text-center" role="alert">
+      {{ Msg }}
+    </div>
+  </div>
 </div>

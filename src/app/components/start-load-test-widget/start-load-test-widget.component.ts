@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import LoadTestConfig from '../../models/LoadTestConfig';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatInputModule } from '@angular/material/input';
+
+//NgRX
+/*import { SwagPaths } from '../../state/swag-paths/swag-paths.model';
+import { POPULATE_PATHS } from '../../state/swag-paths/swag-paths.actions';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { ParseError } from '@angular/compiler';
+*/
 
 @Component({
   selector: 'app-start-load-test-widget',
@@ -18,6 +23,8 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   advance: boolean = false;
   indexValue = 0;
   LFC;
+  Msg: string = '';
+  public MsgShow: boolean = false;
 
   private Base_Url = 'http://localhost:8083/Docutest';
 
@@ -29,7 +36,10 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     rampUp: new FormControl(''),
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    //private store: Store<{swagPaths}>,) {
+    //this.swagPaths$ = store.select('swagPaths');
+  }
 
   ngOnInit(): void {}
 
@@ -50,7 +60,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     // this.submit(lfc);
     this.startTimer();
     this.running = true;
-    console.log(this.running);
+    this.submit(this.LFC);
   }
 
   startTimer() {
@@ -69,11 +79,31 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   }
 
   submit(item: any) {
-    const formData = new FormData();
-    formData.append('file', sessionStorage.getItem('file'));
-    this.http.post<any>(`${this.Base_Url}/upload`, formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err),
-    );
+    /*const formData = new FormData();
+    formData.append('file', localStorage.getItem('swagPaths'));
+
+    try{
+    this.http.post<any>(`${this.Base_Url}/upload`, formData);
+    this.SuccessfulMessage();
+  }catch(error){
+    console.log(error);
+    this.ErrorMessage();
+  }*/
+  }
+
+  SuccessfulMessage(): void {
+    this.Msg = 'Success!!';
+    this.MsgShow = true;
+    setTimeout(() => {
+      this.MsgShow = false;
+    }, 3000);
+  }
+
+  ErrorMessage(): void {
+    this.Msg = 'Error!!';
+    this.MsgShow = true;
+    setTimeout(() => {
+      this.MsgShow = false;
+    }, 3000);
   }
 }
