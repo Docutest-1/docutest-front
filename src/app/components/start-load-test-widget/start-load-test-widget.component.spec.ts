@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartLoadTestWidgetComponent } from './start-load-test-widget.component';
+import StartLoadTestWidgetComponent from './start-load-test-widget.component';
 
 describe('StartLoadTestWidgetComponent', () => {
   let component: StartLoadTestWidgetComponent;
@@ -8,9 +8,8 @@ describe('StartLoadTestWidgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartLoadTestWidgetComponent ]
-    })
-    .compileComponents();
+      declarations: [StartLoadTestWidgetComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

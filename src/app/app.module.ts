@@ -13,9 +13,13 @@ import NavbarComponent from './components/navbar/navbar.component';
 import DashboardComponent from './pages/dashboard/dashboard.component';
 import LineChartComponent from './components/line-chart/line-chart.component';
 import LeftColumnComponent from './components/left-column/left-column.component';
+import StartLoadTestWidgetComponent from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
-
 import HttpTableComponent from './components/http-table/http-table.component';
+import { CommonModule } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,8 +30,13 @@ import HttpTableComponent from './components/http-table/http-table.component';
     FileUploadComponent,
     LeftColumnComponent,
     HttpTableComponent,
+    StartLoadTestWidgetComponent,
   ],
   imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,

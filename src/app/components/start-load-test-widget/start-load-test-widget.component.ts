@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-/* import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatInputModule } from '@angular/material/input'; */
-
 import { HttpClient } from '@angular/common/http';
 import LoadTestConfig from '../../models/LoadTestConfig';
-/* import { GraphRoute } from '../../state/graph-route/graph-route.model';
-import { UPDATE_ROUTE } from '../../state/graph-route/graph-route.actions';
-import { Store } from '@ngrx/store'; */
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-start-load-test-widget',
@@ -17,14 +12,10 @@ import { Store } from '@ngrx/store'; */
   styleUrls: ['./start-load-test-widget.component.scss'],
 })
 export default class StartLoadTestWidgetComponent implements OnInit {
-  time = 0;
-
+  time: number = 0;
   interval;
-
-  running = false;
-
-  advance = false;
-
+  running: boolean = false;
+  advance: boolean = false;
   indexValue = 0;
   LFC;
 
@@ -59,6 +50,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     // this.submit(lfc);
     this.startTimer();
     this.running = true;
+    console.log(this.running);
   }
 
   startTimer() {
