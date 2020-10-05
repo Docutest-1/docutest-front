@@ -1,7 +1,22 @@
 <nav class="navbar bg-dark bg-light custom">
-    <a class="navbar-brand" href="/landing">
-        <div class="box">
-          <h2 id="title-button" class="inner-text">Docutest</h2>
-        </div>
-    </a>
+  <a class="navbar-brand" href="/landing">
+    <div class="box">
+      <h2 id="title-button" class="inner-text">Docutest</h2>
+    </div>
+  </a>
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Click Me
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" [routerLink]="['/widget']">Run Test</a>
+    </div>
+  </div>
 </nav>
