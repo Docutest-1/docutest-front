@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="child">
+    <button
+      *ngIf="!running"
+      class="btn btn-primary"
+      type="button"
+      (click)="startTest(); click = true"
+    >
+      Start Load Test
+    </button>
+    <button
+      class="btn btn-primary btn-sm"
+      type="button"
+      (click)="showAdvance()"
+      id="advance"
+      [disabled]="click"
+    >
+      Advance Options
+    </button>
+    <button class="btn btn-primary" (click)="stop()">Cancel</button>
+    <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
+    <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
+  </div>
+  <div class="child" *ngIf="advance">
+    <form [formGroup]="AdvanceForm">
+      <ul>
+        <li>Definition of the custom settings here</li>
+        <li>Custom name to save test plans?</li>
+        <li>Example Text here!!</li>
+      </ul>
+
+      <mat-form-field>
+        <mat-label>Test plan name </mat-label>
+        <input matInput type="text" id="planName" value="" formControlName="planName" /><br />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Number of Loops </mat-label>
+        <input matInput type="number" id="loops" min="0" max="200" formControlName="loops" /><br />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Duration (in Seconds) </mat-label>
+        <input
+          matInput
+          type="number"
+          id="duration"
+          min="0"
+          max="200"
+          formControlName="duration"
+        /><br />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Number of threads </mat-label>
+        <input
+          matInput
+          type="number"
+          id="thread"
+          min="0"
+          max="200"
+          formControlName="thread"
+        /><br />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ramp Up (in Seconds) </mat-label>
+        <input
+          matInput
+          type="number"
+          id="rampUp"
+          min="0"
+          max="200"
+          formControlName="rampUp"
+        /><br />
+      </mat-form-field>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" formControlName="followRedirect"
+          >Follow Redirect</mat-checkbox
+        >
+      </section>
+    </form>
+  </div>
+  <div *ngIf="running">
+    <h3>Load Test Settings</h3>
+    <p *ngIf="advance">Test Plan Name : {{ LFC.testPlanName }}</p>
+    <p>
+      Number of Loops : <strong>{{ LFC.loops }} Loops</strong>
+    </p>
+    <p>
+      Length of tests :<strong> {{ LFC.duration }} seconds</strong>
+    </p>
+    <p>
+      Number of threads : <strong> {{ LFC.threads }} Users </strong>
+    </p>
+    <p>
+      Ramp up Period <strong>{{ LFC.rampUp }} Seconds</strong>
+    </p>
+  </div>
+  <div class="center">
+    <div *ngIf="MsgShowSuccess" class="alert alert-success text-center" role="alert">
+      {{ Msg }}
+    </div>
+    <div *ngIf="MsgShowError" class="alert alert-danger text-center" role="alert">
+      {{ Msg }}
+    </div>
+  </div>
+</div>

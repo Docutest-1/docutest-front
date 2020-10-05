@@ -6,6 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +20,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { LeftColumnComponent } from './components/left-column/left-column.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { HttpTableComponent } from './components/http-table/http-table.component';
-import { TempFileUploadComponent } from './components/temp-file-upload/temp-file-upload.component';
+import StartLoadTestWidgetComponent from './components/start-load-test-widget/start-load-test-widget.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +31,14 @@ import { TempFileUploadComponent } from './components/temp-file-upload/temp-file
     FileUploadComponent,
     LeftColumnComponent,
     HttpTableComponent,
-    TempFileUploadComponent
+    StartLoadTestWidgetComponent,
   ],
   imports: [
+    MatCheckboxModule,
+    MatSliderModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
@@ -41,7 +51,7 @@ import { TempFileUploadComponent } from './components/temp-file-upload/temp-file
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 // eslint-disable-next-line import/prefer-default-export
 export class AppModule {}

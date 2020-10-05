@@ -6,13 +6,10 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 const routes: Routes = [
   { path: 'upload', component: FileUploadComponent },
   { path: 'dashboard', component: DashboardComponent },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
