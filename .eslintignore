@@ -1,1 +1,5 @@
 src/polyfills.ts
+
+# Configuration Files
+karma.conf.js
+.eslintrc.js

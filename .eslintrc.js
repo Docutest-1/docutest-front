@@ -15,7 +15,7 @@ module.exports = {
       files: ['*.component.ts', '.*.component.html', '*.ts'],
       extends: [
         // AirBnB Styleguide rules
-       'airbnb-typescript/base',
+        'airbnb-typescript/base',
       ],
       parser: '@typescript-eslint/parser',
       parserOptions: {

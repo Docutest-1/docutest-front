@@ -1,0 +1,42 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests for node 12
+
+name: angular-sonar
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Resolving dependencies
+        run: npm ci
+      - run: npm run lint
+      - name: Run tests
+        run: node ./node_modules/@angular/cli/bin/ng test --no-watch --no-progress --browsers=ChromeHeadless
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
