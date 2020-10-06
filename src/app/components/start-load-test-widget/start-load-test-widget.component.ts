@@ -17,7 +17,8 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   indexValue = 0;
   LFC;
   Msg: string = '';
-  public MsgShow: boolean = false;
+  public MsgShowError: boolean = false;
+  public MsgShowSuccess: boolean = false;
 
   private Base_Url = 'http://localhost:8083/Docutest';
 
@@ -55,14 +56,19 @@ export default class StartLoadTestWidgetComponent implements OnInit {
       if (this.LFC.rampUp == '') {
         this.LFC.rampUp = 100;
       }
-      console.log(this.LFC);
     } else {
       this.LFC = new LoadTestConfig('Default', 100, 100, 100, 100);
-      console.log(this.LFC);
     }
-    this.startTimer();
-    this.running = true;
-    this.submit(this.LFC);
+    if (
+      this.LFC.loops == null ||
+      this.LFC.duration == null ||
+      this.LFC.threads == null ||
+      this.LFC.rampUp == null
+    ) {
+      this.ErrorMessage('Please use numbers');
+    } else {
+      this.submit(this.LFC);
+    }
   }
 
   startTimer() {
@@ -76,32 +82,46 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     }
   }
 
+  stopTimer() {
+    this.running = false;
+  }
+
+  submit(item: any) {
+    this.startTimer();
+    this.running = true;
+    //Submit the swag file here!! and the load Test configurations for the Jmeter Service to use.
+    /*const formData = new FormData();
+    formData.append('file', localStorage.getItem('swagPaths'));
+    this.http
+      .post<any>('BaseUrl' + '/upload', {
+        Swag: formData,
+        loadTestconfiguration: item,
+      })
+      .subscribe(
+        (res) => this.SuccessfulMessage(),
+        (err) => this.ErrorMessage(err),
+      );*/
+  }
+
   showAdvance() {
     this.advance = !this.advance;
   }
 
-  submit(item: any) {
-    this.SuccessfulMessage();
-    this.ErrorMessage();
-  }
-
   SuccessfulMessage(): void {
     this.Msg = 'Success!!';
-    this.MsgShow = true;
+    this.MsgShowSuccess = true;
     setTimeout(() => {
-      this.MsgShow = false;
+      this.MsgShowSuccess = false;
     }, 3000);
   }
 
-  ErrorMessage(): void {
-    this.Msg = 'Error!!';
-    this.MsgShow = true;
+  ErrorMessage(error): void {
+    this.Msg = error;
+    this.MsgShowError = true;
     setTimeout(() => {
-      this.MsgShow = false;
+      this.MsgShowError = false;
+      this.running = false;
+      this.click = false;
     }, 3000);
-  }
-
-  stopTimer() {
-    this.running = false;
   }
 }

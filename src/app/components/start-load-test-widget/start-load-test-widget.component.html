@@ -23,11 +23,12 @@
   <div class="child" *ngIf="advance">
     <form [formGroup]="AdvanceForm">
       <ul>
-        <li>Define test Plan.</li>
-        <li>Determine default number of</li>
+        <li>Definition of the custom settings here.</li>
+        <li>Custom name to save test plans?</li>
         <li>Duration is the length of time of each loop.</li>
-        <li>number of threads is the amount of users given</li>
+        <li>Number of threads is the amount of users given</li>
         <li>Ramp up is the amount of time in seconds</li>
+        <li>Any field not filled in will go to the default value.</li>
       </ul>
 
       <mat-form-field>
@@ -36,19 +37,40 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Number of Loops </mat-label>
-        <input matInput type="number" id="loops" min="0" formControlName="loops" /><br />
+        <input matInput type="number" id="loops" min="0" max="200" formControlName="loops" /><br />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Duration (in Seconds) </mat-label>
-        <input matInput type="number" id="duration" min="0" formControlName="duration" /><br />
+        <input
+          matInput
+          type="number"
+          id="duration"
+          min="0"
+          max="200"
+          formControlName="duration"
+        /><br />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Number of threads </mat-label>
-        <input matInput type="number" id="thread" min="0" formControlName="thread" /><br />
+        <input
+          matInput
+          type="number"
+          id="thread"
+          min="0"
+          max="200"
+          formControlName="thread"
+        /><br />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Ramp Up (in Seconds) </mat-label>
-        <input matInput type="number" id="rampUp" min="0" formControlName="rampUp" /><br />
+        <input
+          matInput
+          type="number"
+          id="rampUp"
+          min="0"
+          max="200"
+          formControlName="rampUp"
+        /><br />
       </mat-form-field>
     </form>
   </div>
@@ -69,7 +91,10 @@
     </p>
   </div>
   <div class="center">
-    <div *ngIf="MsgShow" class="alert alert-success text-center" role="alert">
+    <div *ngIf="MsgShowSuccess" class="alert alert-success text-center" role="alert">
+      {{ Msg }}
+    </div>
+    <div *ngIf="MsgShowError" class="alert alert-danger text-center" role="alert">
       {{ Msg }}
     </div>
   </div>
