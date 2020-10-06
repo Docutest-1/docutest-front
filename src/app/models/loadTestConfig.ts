@@ -3,7 +3,7 @@ export default class LoadTestConfig {
 
   loops: number;
 
-  durations: number;
+  duration: number;
 
   threads: number;
 
@@ -12,13 +12,13 @@ export default class LoadTestConfig {
   public constructor(
     testPlanName: string,
     loops: number,
-    durations: number,
+    duration: number,
     threads: number,
     rampUp: number,
   ) {
     this.testPlanName = testPlanName;
     this.loops = loops;
-    this.durations = durations;
+    this.duration = duration;
     this.threads = threads;
     this.rampUp = rampUp;
   }

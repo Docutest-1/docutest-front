@@ -7,7 +7,6 @@ import StartLoadTestWidgetComponent from './components/start-load-test-widget/st
 const routes: Routes = [
   { path: 'upload', component: FileUploadComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'widget', component: StartLoadTestWidgetComponent },
 ];
 
 @NgModule({

@@ -1,22 +1,45 @@
 <div class="container">
   <div class="child">
-    <button class="btn btn-primary" type="button" (click)="startTest()">Start Load Test</button>
-    <button class="btn btn-primary" type="button" (click)="showAdvance()">Advance Options</button>
-    <p *ngIf="running">Seconds after timer started : {{ time }}</p>
+    <button
+      *ngIf="!running"
+      class="btn btn-primary"
+      type="button"
+      (click)="startTest(); click = true"
+    >
+      Start Load Test
+    </button>
+    <button
+      class="btn btn-secondary btn-sm"
+      type="button"
+      (click)="showAdvance()"
+      id="advance"
+      [disabled]="click"
+    >
+      Advance Options
+    </button>
+    <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
     <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
   </div>
   <div class="child" *ngIf="advance">
     <form [formGroup]="AdvanceForm">
+      <ul>
+        <li>Define test Plan.</li>
+        <li>Determine default number of</li>
+        <li>Duration is the length of time of each loop.</li>
+        <li>number of threads is the amount of users given</li>
+        <li>Ramp up is the amount of time in seconds</li>
+      </ul>
+
       <mat-form-field>
-        <mat-label>Test plan name: </mat-label>
+        <mat-label>Test plan name </mat-label>
         <input matInput type="text" id="planName" value="" formControlName="planName" /><br />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Number of Loops: </mat-label>
+        <mat-label>Number of Loops </mat-label>
         <input matInput type="number" id="loops" min="0" formControlName="loops" /><br />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Duration : </mat-label>
+        <mat-label>Duration (in Seconds) </mat-label>
         <input matInput type="number" id="duration" min="0" formControlName="duration" /><br />
       </mat-form-field>
       <mat-form-field>
@@ -24,7 +47,7 @@
         <input matInput type="number" id="thread" min="0" formControlName="thread" /><br />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Number of rampUp: </mat-label>
+        <mat-label>Ramp Up (in Seconds) </mat-label>
         <input matInput type="number" id="rampUp" min="0" formControlName="rampUp" /><br />
       </mat-form-field>
     </form>
@@ -32,10 +55,18 @@
   <div *ngIf="running">
     <h3>Load Test Settings</h3>
     <p *ngIf="advance">Test Plan Name : {{ LFC.testPlanName }}</p>
-    <p>Number of Loops : {{ LFC.loops }} Loops</p>
-    <p>Duration of tests : {{ LFC.durations }} seconds</p>
-    <p>Number of threads : {{ LFC.threads }} threads</p>
-    <p>number of ramp ups : {{ LFC.rampUp }} ramps</p>
+    <p>
+      Number of Loops : <strong>{{ LFC.loops }} Loops</strong>
+    </p>
+    <p>
+      Length of tests :<strong> {{ LFC.duration }} seconds</strong>
+    </p>
+    <p>
+      Number of threads : <strong> {{ LFC.threads }} Users </strong>
+    </p>
+    <p>
+      Ramp up Period <strong>{{ LFC.rampUp }} Seconds</strong>
+    </p>
   </div>
   <div class="center">
     <div *ngIf="MsgShow" class="alert alert-success text-center" role="alert">

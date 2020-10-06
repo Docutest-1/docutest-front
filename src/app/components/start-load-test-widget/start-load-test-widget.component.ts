@@ -3,14 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import LoadTestConfig from '../../models/LoadTestConfig';
 
-//NgRX
-/*import { SwagPaths } from '../../state/swag-paths/swag-paths.model';
-import { POPULATE_PATHS } from '../../state/swag-paths/swag-paths.actions';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { ParseError } from '@angular/compiler';
-*/
-
 @Component({
   selector: 'app-start-load-test-widget',
   templateUrl: './start-load-test-widget.component.html',
@@ -21,6 +13,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   interval;
   running: boolean = false;
   advance: boolean = false;
+  click: boolean = false;
   indexValue = 0;
   LFC;
   Msg: string = '';
@@ -36,10 +29,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     rampUp: new FormControl(''),
   });
 
-  constructor(private http: HttpClient) {
-    //private store: Store<{swagPaths}>,) {
-    //this.swagPaths$ = store.select('swagPaths');
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 
@@ -53,11 +43,23 @@ export default class StartLoadTestWidgetComponent implements OnInit {
         this.AdvanceForm.get('rampUp').value,
       );
       console.log(this.LFC);
+      if (this.LFC.loops == '') {
+        this.LFC.loops = 100;
+      }
+      if (this.LFC.duration == '') {
+        this.LFC.duration = 100;
+      }
+      if (this.LFC.threads == '') {
+        this.LFC.threads = 100;
+      }
+      if (this.LFC.rampUp == '') {
+        this.LFC.rampUp = 100;
+      }
+      console.log(this.LFC);
     } else {
-      this.LFC = new LoadTestConfig('Default', 123, 123, 123, 123);
+      this.LFC = new LoadTestConfig('Default', 100, 100, 100, 100);
       console.log(this.LFC);
     }
-    // this.submit(lfc);
     this.startTimer();
     this.running = true;
     this.submit(this.LFC);
@@ -68,7 +70,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
       this.interval = setInterval(() => {
         this.time += 1;
         if (this.time > 200) {
-          this.running = false;
+          this.stopTimer();
         }
       }, 1000);
     }
@@ -79,16 +81,8 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   }
 
   submit(item: any) {
-    /*const formData = new FormData();
-    formData.append('file', localStorage.getItem('swagPaths'));
-
-    try{
-    this.http.post<any>(`${this.Base_Url}/upload`, formData);
     this.SuccessfulMessage();
-  }catch(error){
-    console.log(error);
     this.ErrorMessage();
-  }*/
   }
 
   SuccessfulMessage(): void {
@@ -105,5 +99,9 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     setTimeout(() => {
       this.MsgShow = false;
     }, 3000);
+  }
+
+  stopTimer() {
+    this.running = false;
   }
 }
