@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatSliderModule } from '@angular/material/slider';
     StartLoadTestWidgetComponent,
   ],
   imports: [
+    MatCheckboxModule,
     MatSliderModule,
     MatInputModule,
     MatFormFieldModule,

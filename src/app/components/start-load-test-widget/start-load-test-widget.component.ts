@@ -28,6 +28,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     duration: new FormControl(''),
     thread: new FormControl(''),
     rampUp: new FormControl(''),
+    followRedirect: new FormControl(''),
   });
 
   constructor(private http: HttpClient) {}
@@ -42,6 +43,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
         this.AdvanceForm.get('duration').value,
         this.AdvanceForm.get('thread').value,
         this.AdvanceForm.get('rampUp').value,
+        this.AdvanceForm.get('followRedirect').value,
       );
       console.log(this.LFC);
       if (this.LFC.loops == '') {
@@ -57,7 +59,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
         this.LFC.rampUp = 100;
       }
     } else {
-      this.LFC = new LoadTestConfig('Default', 100, 100, 100, 100);
+      this.LFC = new LoadTestConfig('Default', 100, 100, 100, 100, true);
     }
     if (
       this.LFC.loops == null ||
@@ -89,9 +91,11 @@ export default class StartLoadTestWidgetComponent implements OnInit {
   submit(item: any) {
     this.startTimer();
     this.running = true;
+    console.log(JSON.stringify(this.LFC));
     //Submit the swag file here!! and the load Test configurations for the Jmeter Service to use.
     /*const formData = new FormData();
     formData.append('file', localStorage.getItem('swagPaths'));
+    
     this.http
       .post<any>('BaseUrl' + '/upload', {
         Swag: formData,
@@ -123,5 +127,9 @@ export default class StartLoadTestWidgetComponent implements OnInit {
       this.running = false;
       this.click = false;
     }, 3000);
+  }
+
+  stop() {
+    this.running = false;
   }
 }

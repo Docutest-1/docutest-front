@@ -9,7 +9,7 @@
       Start Load Test
     </button>
     <button
-      class="btn btn-secondary btn-sm"
+      class="btn btn-primary btn-sm"
       type="button"
       (click)="showAdvance()"
       id="advance"
@@ -17,6 +17,7 @@
     >
       Advance Options
     </button>
+    <button class="btn btn-primary" (click)="stop()">Cancel</button>
     <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
     <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
   </div>
@@ -27,7 +28,7 @@
         <li>Custom name to save test plans?</li>
         <li>Duration is the length of time of each loop.</li>
         <li>Number of threads is the amount of users given</li>
-        <li>Ramp up is the amount of time in seconds</li>
+        <li>Ramp up is the amount of time in Milliseconds</li>
         <li>Any field not filled in will go to the default value.</li>
       </ul>
 
@@ -72,6 +73,11 @@
           formControlName="rampUp"
         /><br />
       </mat-form-field>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" formControlName="followRedirect"
+          >Follow Redirect</mat-checkbox
+        >
+      </section>
     </form>
   </div>
   <div *ngIf="running">
