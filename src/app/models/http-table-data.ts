@@ -1,4 +1,6 @@
 export class HttpTableData {
+  public id: number;
+
   public uri: string;
 
   public httpMethod: string;
@@ -23,6 +25,7 @@ export class HttpTableData {
 
   constructor();
   constructor(
+    id: number,
     uri: string,
     httpMethod: string,
     responseAvg: number,
@@ -36,6 +39,7 @@ export class HttpTableData {
     dataReference: string
   );
   constructor(
+    id?: number,
     uri?: string,
     httpMethod?: string,
     responseAvg?: number,
@@ -48,6 +52,7 @@ export class HttpTableData {
     reqPerSec?: number,
     dataReference?: string
   ) {
+    this.id = id;
     this.uri = uri;
     this.httpMethod = httpMethod;
     this.responseAvg = responseAvg;

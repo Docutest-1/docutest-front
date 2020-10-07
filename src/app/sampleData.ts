@@ -1,6 +1,7 @@
 import { HttpTableData } from './models/http-table-data';
 
 export const data: HttpTableData = {
+  id: 1,
   uri: 'google.com/whateverpath',
   httpMethod: 'GET',
   responseAvg: 16,
