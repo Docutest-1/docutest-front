@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync } from '@angular/core/testing';
+import {
+  async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync
+} from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
@@ -16,7 +18,7 @@ describe('FileUploadComponent', () => {
       declarations: [FileUploadComponent],
       providers: [FormBuilder],
       imports: [HttpClientTestingModule]
-    })
+    });
 
     fixture = TestBed.createComponent(FileUploadComponent);
     component = fixture.componentInstance;

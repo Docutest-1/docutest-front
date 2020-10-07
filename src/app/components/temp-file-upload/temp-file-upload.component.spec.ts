@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync } from '@angular/core/testing';
+import {
+  async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync
+} from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
 import { TempFileUploadComponent } from './temp-file-upload.component';

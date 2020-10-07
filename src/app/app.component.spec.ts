@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from '../app/components/navbar/navbar.component'
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -28,6 +28,7 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
 
     app.ngOnInit();
+
     expect(app.title).toEqual('docutest');
   });
 
