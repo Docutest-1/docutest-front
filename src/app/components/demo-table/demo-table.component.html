@@ -21,13 +21,13 @@
     <tbody>
       <tr>
         <th scope="row"></th>
-        <td>{{res.id}}</td>
-        <td>{{res.testPlanName}}</td>
-        <td>{{res.loops}}</td>
-        <td>{{res.duration}}</td>
-        <td>{{res.threads}}</td>
-        <td>{{res.rampUp}}</td>
-        <td>{{res.followRedirects}}</td>
+        <td>{{swaggerSummary.id }}</td>
+        <td>{{swaggerSummary.testPlanName}}</td>
+        <td>{{swaggerSummary.loops}}</td>
+        <td>{{swaggerSummary.duration}}</td>
+        <td>{{swaggerSummary.threads}}</td>
+        <td>{{swaggerSummary.rampUp}}</td>
+        <td>{{swaggerSummary.followRedirects}}</td>
         
  
       </tr>
@@ -63,9 +63,9 @@
       <!--Table columns end -->
     </thead>
     <tbody>
-      <tr *ngFor="let d of resultSummaries">
+      <tr *ngFor="let d of resultSummary">
         <th scope="row"></th>
-        <td>{{res.id}}</td>
+        <td>{{swaggerSummary.id}}</td>
         <td>{{d.id}}</td>
         <td>{{d.uri}}</td>
         <td>{{d.httpMethod}}</td>

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable no-undef */
+import {
+  Component, OnInit
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpTableData } from '../../models/http-table-data';
-import { Re } from '../../models/response';
+import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
+import { ResultSummary } from '../../models/result-summary/result-summary';
 
 @Component({
   selector: 'app-demo-table',
@@ -11,16 +14,21 @@ import { Re } from '../../models/response';
 export class DemoTableComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
-  public res : Re;
+  public swaggerSummary : SwaggerSummary;
 
-  public resultSummaries : HttpTableData [] = undefined;
+  public swaggerSummaryId : number;
 
-  async ngOnInit(): Promise<void> {
-    const re = await this.http.get<Re>('http://localhost:8083/Docutest/swaggersummary/3', {
+  public resultSummary : ResultSummary[];
+
+  async ngOnInit(): Promise<SwaggerSummary> {
+    this.swaggerSummaryId = Number(sessionStorage.getItem('swaggerSummaryId'));
+    const re = await this.http.get<SwaggerSummary>(`http://localhost:8083/Docutest/swaggersummary/${this.swaggerSummaryId}`, {
 
     }).toPromise();
 
-    this.res = re;
-    this.resultSummaries = re.resultsummaries;
+    this.swaggerSummary = re;
+    this.resultSummary = re.resultsummaries;
+    sessionStorage.removeItem('swaggerSummaryId');
+    return this.swaggerSummary;
   }
 }
