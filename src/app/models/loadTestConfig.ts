@@ -1,9 +1,14 @@
-export default class LoadTestConfig {
+export class LoadTestConfig {
   testPlanName: string;
+
   loops: number;
+
   duration: number;
+
   threads: number;
+
   rampUp: number;
+
   followRedirects: boolean;
 
   public constructor(

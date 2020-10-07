@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import LoadTestConfig from '../../models/LoadTestConfig';
+import { LoadTestConfig } from 'src/app/models/loadTestConfig';
 
-//NgRX
-/*import { SwagPaths } from '../../state/swag-paths/swag-paths.model';
+// NgRX
+/* import { SwagPaths } from '../../state/swag-paths/swag-paths.model';
 import { POPULATE_PATHS } from '../../state/swag-paths/swag-paths.actions';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -17,16 +16,25 @@ import { ParseError } from '@angular/compiler';
   styleUrls: ['./start-load-test-widget.component.scss'],
 })
 export default class StartLoadTestWidgetComponent implements OnInit {
-  time: number = 0;
+  time = 0;
+
   interval;
-  running: boolean = false;
-  advance: boolean = false;
-  click: boolean = false;
+
+  running = false;
+
+  advance = false;
+
+  click = false;
+
   indexValue = 0;
+
   LFC;
-  Msg: string = '';
-  public MsgShowError: boolean = false;
-  public MsgShowSuccess: boolean = false;
+
+  Msg = '';
+
+  public MsgShowError = false;
+
+  public MsgShowSuccess = false;
 
   private Base_Url = 'http://localhost:8083/Docutest';
 
@@ -39,11 +47,7 @@ export default class StartLoadTestWidgetComponent implements OnInit {
     followRedirect: new FormControl(''),
   });
 
-  constructor(private http: HttpClient) {
-    //private store: Store<{swagPaths}>,) {
-    //this.swagPaths$ = store.select('swagPaths');
-  }
-
+  // eslint-disable-next-line class-methods-use-this
   ngOnInit(): void {}
 
   startTest() {
@@ -56,12 +60,11 @@ export default class StartLoadTestWidgetComponent implements OnInit {
         this.AdvanceForm.get('rampUp').value,
         this.AdvanceForm.get('followRedirect').value,
       );
-      console.log(this.LFC);
-      if (this.LFC.loops == '') {
-        this.LFC.loops = 0;
+      if (this.LFC.loops === '' || this.LFC.duration > 0) {
+        this.LFC.loops = -1;
       }
-      if (this.LFC.duration == '') {
-        this.LFC.duration = 10;
+      if (this.LFC.duration === '' || this.LFC.loops > 0) {
+        this.LFC.duration = 0;
       }
       if (this.LFC.threads == '') {
         this.LFC.threads = 10;
@@ -73,14 +76,14 @@ export default class StartLoadTestWidgetComponent implements OnInit {
       this.LFC = new LoadTestConfig('Default', 0, 10, 10, 10, true);
     }
     if (
-      this.LFC.loops == null ||
-      this.LFC.duration == null ||
-      this.LFC.threads == null ||
-      this.LFC.rampUp == null
+      this.LFC.loops == null
+      || this.LFC.duration == null
+      || this.LFC.threads == null
+      || this.LFC.rampUp == null
     ) {
       this.ErrorMessage('Please use numbers');
     } else {
-      this.submit(this.LFC);
+      this.submit();
     }
   }
 
@@ -97,12 +100,13 @@ export default class StartLoadTestWidgetComponent implements OnInit {
 
   stopTimer() {
     this.running = false;
+    this.time = 0;
+    clearInterval(this.interval);
   }
 
-  submit(item: LoadTestConfig) {
-    this.startTimer();
+  submit() {
     this.running = true;
-    console.log(JSON.stringify(item));
+    this.startTimer();
   }
 
   showAdvance() {
