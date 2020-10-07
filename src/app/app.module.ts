@@ -21,7 +21,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { LeftColumnComponent } from './components/left-column/left-column.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { HttpTableComponent } from './components/http-table/http-table.component';
-import StartLoadTestWidgetComponent from './components/start-load-test-widget/start-load-test-widget.component';
+import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 
 @NgModule({
   declarations: [

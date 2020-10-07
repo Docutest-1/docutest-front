@@ -22,7 +22,7 @@
     <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
   </div>
   <div class="child" *ngIf="advance">
-    <form [formGroup]="AdvanceForm">
+    <form [formGroup]="advanceForm">
       <ul>
         <li>Definition of the custom settings here</li>
         <li>Custom name to save test plans?</li>
@@ -78,27 +78,38 @@
     </form>
   </div>
   <div *ngIf="running">
-    <h3>Load Test Settings</h3>
-    <p *ngIf="advance">Test Plan Name : {{ LFC.testPlanName }}</p>
-    <p>
-      Number of Loops : <strong>{{ LFC.loops }} Loops</strong>
-    </p>
-    <p>
-      Length of tests :<strong> {{ LFC.duration }} seconds</strong>
-    </p>
-    <p>
-      Number of threads : <strong> {{ LFC.threads }} Users </strong>
-    </p>
-    <p>
-      Ramp up Period <strong>{{ LFC.rampUp }} Seconds</strong>
-    </p>
+    <table>
+      <caption>Load Test Configuration</caption>
+      <th scope="col">Load Test Settings</th>
+      <tr *ngIf="advance">
+        Test Plan Name :
+        {{
+          LTC.testPlanName
+        }}
+      </tr>
+      <tr>
+        Number of Loops :
+        <strong>{{ LTC.loops }} Loops</strong>
+      </tr>
+      <tr>
+        Length of tests :<strong> {{ LTC.duration }} seconds</strong>
+      </tr>
+      <tr>
+        Number of threads :
+        <strong> {{ LTC.threads }} Users </strong>
+      </tr>
+      <tr>
+        Ramp up Period
+        <strong>{{ LTC.rampUp }} Seconds</strong>
+      </tr>
+    </table>
   </div>
   <div class="center">
-    <div *ngIf="MsgShowSuccess" class="alert alert-success text-center" role="alert">
-      {{ Msg }}
+    <div *ngIf="msgShowSuccess" class="alert alert-success text-center" role="alert">
+      {{ msg }}
     </div>
-    <div *ngIf="MsgShowError" class="alert alert-danger text-center" role="alert">
-      {{ Msg }}
+    <div *ngIf="msgShowError" class="alert alert-danger text-center" role="alert">
+      {{ msg }}
     </div>
   </div>
 </div>
