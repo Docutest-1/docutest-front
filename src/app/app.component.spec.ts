@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from '../app/components/navbar/navbar.component'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,7 +10,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent
       ],
     }).compileComponents();
   }));
@@ -25,14 +27,16 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
 
+    app.ngOnInit();
     expect(app.title).toEqual('docutest');
   });
 
-  it('should render title', () => {
+  it('should render navbar', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const navbar = TestBed.createComponent(NavbarComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
 
-    expect(compiled.querySelector('.content span').textContent).toContain('docutest app is running!');
+    expect(compiled.querySelector('h2').textContent).toContain('Docutest');
   });
 });
