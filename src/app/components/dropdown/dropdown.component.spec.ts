@@ -1,22 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { DropdownComponent } from './dropdown.component';
 
 describe('DropdownComponent', () => {
   let component: DropdownComponent;
-  let fixture: ComponentFixture<DropdownComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [DropdownComponent]
-    })
-      .compileComponents();
-  }));
+  let store: MockStore;
+  const initialState = { graph: false };
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DropdownComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [
+        DropdownComponent,
+        provideMockStore({ initialState })
+      ]
+    });
+
+    store = TestBed.inject(MockStore);
+    component = TestBed.inject(DropdownComponent);
   });
 
   it('should create', () => {
