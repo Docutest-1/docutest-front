@@ -38,6 +38,12 @@ export class FileUploadComponent implements OnInit {
 
   public swaggerUploadResponse: SwaggerUploadResponse;
 
+  public secondsUntilETA: number;
+
+  public swaggerSummary: SwaggerSummary;
+
+  public swaggerUploadResponse: SwaggerUploadResponse;
+
   /** Used to reset the file input */
   @ViewChild('fileIn')
   fileInput: ElementRef;
@@ -183,6 +189,44 @@ export class FileUploadComponent implements OnInit {
         this.errorMsg = 'Error: Invalid base path.';
         this.displayErrorMsg();
       }
+    }
+  }
+
+  async onSubmit(): Promise<void> {
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('swaggerFile').value);
+    formData.append('LoadTestConfig', '{ "testPlanName" : "ThreeEndpointTest", "loops" : -1, "duration" : 10, "threads" : 10, "rampUp" : 2,  "followRedirects" : true }');
+    // this.http.post<SwaggerUploadResponse>(`${this.baseUrl}/upload`, formData).subscribe(
+    //   (res) => console.log(res),
+    //   (err) => console.log(err),
+    // );
+    console.log('Posting Swagger File');
+    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${this.baseUrl}Docutest/upload`, formData).toPromise();
+    console.log('Received Swagger Response:', swaggerResponse);
+    this.secondsUntilETA = (swaggerResponse.eta - new Date().getTime());
+    console.log('Estimated ETA:', this.secondsUntilETA * 1000);
+    await this.timeout();
+    console.log('Timeout Complete');
+    this.retrieveSwaggerSummary(swaggerResponse);
+    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+  }
+
+  timeout(): Promise<any> {
+    return new Promise((resolve) => setTimeout(resolve, this.secondsUntilETA));
+  }
+
+  async retrieveSwaggerSummary(swaggerResponse: SwaggerUploadResponse) {
+    console.log('Entered Swagger Summary Retriever');
+    let receivedSummary = false;
+    while (!receivedSummary) {
+      /* eslint-disable no-await-in-loop */
+      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${this.baseUrl}${swaggerResponse.resultRef}`).toPromise();
+      /* eslint-enable no-await-in-loop */
+      if (this.swaggerSummary.resultsummaries.length) {
+        console.log(this.swaggerSummary);
+        receivedSummary = true;
+      }
+      console.log('Swagger Summary Results Summary Length:', this.swaggerSummary.resultsummaries.length);
     }
   }
 }
