@@ -15,7 +15,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { LeftColumnComponent } from './components/left-column/left-column.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { HttpTableComponent } from './components/http-table/http-table.component';
-import {TempFileUploadComponent} from "./components/temp-file-upload/temp-file-upload.component";
+import { TempFileUploadComponent } from './components/temp-file-upload/temp-file-upload.component';
 
 @NgModule({
   declarations: [
