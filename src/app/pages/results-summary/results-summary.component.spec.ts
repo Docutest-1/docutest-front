@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DemoTableComponent } from './demo-table.component';
+import { ResultsSummaryComponent } from './results-summary.component';
 
-describe('DemoTableComponent', () => {
-  let component: DemoTableComponent;
-  let fixture: ComponentFixture<DemoTableComponent>;
+describe('ResultsSummaryComponent', () => {
+  let component: ResultsSummaryComponent;
+  let fixture: ComponentFixture<ResultsSummaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DemoTableComponent]
+      declarations: [ResultsSummaryComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoTableComponent);
+    fixture = TestBed.createComponent(ResultsSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

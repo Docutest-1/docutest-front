@@ -19,7 +19,7 @@
       <!--Table columns end -->
     </thead>
     <tbody>
-      <tr>
+      <tr *ngIf="swaggerSummary">
         <th scope="row"></th>
         <td>{{swaggerSummary.id }}</td>
         <td>{{swaggerSummary.testPlanName}}</td>
@@ -65,7 +65,7 @@
     <tbody>
       <tr *ngFor="let d of resultSummary">
         <th scope="row"></th>
-        <td>{{swaggerSummary.id}}</td>
+        <td *ngIf="swaggerSumaryId">{{swaggerSummary.id}}</td>
         <td>{{d.id}}</td>
         <td>{{d.uri}}</td>
         <td>{{d.httpMethod}}</td>
