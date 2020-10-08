@@ -1,5 +1,8 @@
-export interface GraphDataArray {
-  dataArray: Array<GraphData>;
+import { ResultSummary } from '../../models/result-summary';
+
+export interface DashboardState {
+  graphDataArray: GraphData[];
+  resultSummaries: ResultSummary[];
 }
 
 export interface GraphData {

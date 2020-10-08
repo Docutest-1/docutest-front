@@ -18,11 +18,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { DemoTableComponent } from './components/demo-table/demo-table.component';
 import { ResultsSummaryComponent } from './pages/results-summary/results-summary.component';
 import { UploadComponent } from './pages/upload/upload.component';
+import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
+import { GenericD3Component } from './components/generic-d3/generic-d3.component';
+import { HttpStatusDonutChartComponent } from './components/http-status-donut-chart/http-status-donut-chart.component';
+import { HttpStatusCircleChartComponent } from './components/http-status-circle-chart/http-status-circle-chart.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { UploadComponent } from './pages/upload/upload.component';
     DemoTableComponent,
     ResultsSummaryComponent,
     UploadComponent,
+    GenericD3Component,
+    HttpStatusDonutChartComponent,
+    HttpStatusCircleChartComponent,
   ],
   imports: [
     CommonModule,
