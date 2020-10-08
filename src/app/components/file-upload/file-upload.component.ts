@@ -38,6 +38,12 @@ export class FileUploadComponent implements OnInit {
 
   public swaggerUploadResponse: SwaggerUploadResponse;
 
+  public loadTestConfig: string;
+
+  public formData: FormData;
+
+  public sessionStorage: Storage;
+
   public secondsUntilETA: number;
 
   public swaggerSummary: SwaggerSummary;
@@ -193,40 +199,22 @@ export class FileUploadComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('swaggerFile').value);
-    formData.append('LoadTestConfig', '{ "testPlanName" : "ThreeEndpointTest", "loops" : -1, "duration" : 10, "threads" : 10, "rampUp" : 2,  "followRedirects" : true }');
-    // this.http.post<SwaggerUploadResponse>(`${this.baseUrl}/upload`, formData).subscribe(
-    //   (res) => console.log(res),
-    //   (err) => console.log(err),
-    // );
+    this.loadTestConfig = this.window.sessionStorage.getItem('loadTestConfig');
+    this.formData.append('file', this.uploadForm.get('swaggerFile').value);
+    this.formData.append('LoadTestConfig', this.loadTestConfig);
     console.log('Posting Swagger File');
-    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${this.baseUrl}Docutest/upload`, formData).toPromise();
+    const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
     console.log('Received Swagger Response:', swaggerResponse);
-    this.secondsUntilETA = (swaggerResponse.eta - new Date().getTime());
+    this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
     console.log('Estimated ETA:', this.secondsUntilETA * 1000);
     await this.timeout();
     console.log('Timeout Complete');
-    this.retrieveSwaggerSummary(swaggerResponse);
-    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+    await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
+    this.window.sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+    this.router.navigateByUrl('/results-summary');
   }
 
   timeout(): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, this.secondsUntilETA));
-  }
-
-  async retrieveSwaggerSummary(swaggerResponse: SwaggerUploadResponse) {
-    console.log('Entered Swagger Summary Retriever');
-    let receivedSummary = false;
-    while (!receivedSummary) {
-      /* eslint-disable no-await-in-loop */
-      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${this.baseUrl}${swaggerResponse.resultRef}`).toPromise();
-      /* eslint-enable no-await-in-loop */
-      if (this.swaggerSummary.resultsummaries.length) {
-        console.log(this.swaggerSummary);
-        receivedSummary = true;
-      }
-      console.log('Swagger Summary Results Summary Length:', this.swaggerSummary.resultsummaries.length);
-    }
   }
 }
