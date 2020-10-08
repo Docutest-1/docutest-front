@@ -193,6 +193,7 @@ export class FileUploadComponent implements OnInit {
       if (this.swaggerSummary.resultsummaries.length) {
         console.log(this.swaggerSummary);
         receivedSummary = true;
+        this.router.navigateByUrl('/results-summary');
       }
       console.log('Swagger Summary Results Summary Length:', this.swaggerSummary.resultsummaries.length);
     }
