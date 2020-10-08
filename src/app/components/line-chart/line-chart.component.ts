@@ -1,6 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
+// NgRX
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { GraphRoute } from '../../state/graph-route/graph-route.model';
+// import { UPDATE_ROUTE } from '../../state/graph-route/graph-route.actions';
 import { multi } from '../../data';
 
 @Component({
@@ -9,6 +14,8 @@ import { multi } from '../../data';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent {
+  graphRoute$: Observable<GraphRoute>;
+
   multi;
 
   routeNames: any[];
@@ -42,7 +49,7 @@ export class LineChartComponent {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor() {
+  constructor(private store: Store<{lineChartData}>) {
     this.routeNames = [];
     Object.assign(this, { multi });
 

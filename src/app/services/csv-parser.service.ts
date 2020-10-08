@@ -3,7 +3,7 @@ import { Papa } from 'ngx-papaparse';
 
 // ngRx
 import { Store } from '@ngrx/store';
-import { ADD_DATA } from '../state/graph-data/graph-data.actions';
+import { ADD_GRAPH_DATA } from '../state/dashboard-data/dashboard-data.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class CsvParserService {
         // Tells store to run update data function and provides a GraphData object
         const newResults = this.editResults(results);
         this.store.dispatch(
-          ADD_DATA({
+          ADD_GRAPH_DATA({
             graphData: {
               name: file.name,
               series: newResults,
