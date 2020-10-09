@@ -45,7 +45,6 @@
       <tr>
         <!--Table columns start -->
         <th scope="col"></th>
-        <th scope="col">Test Plan Id:</th>
         <th scope="col">Result Summary Id:</th>
         <th scope="col">URI</th>
         <th scope="col">HTTP Method</th>
@@ -57,15 +56,13 @@
         <th scope="col">Fail Count</th>
         <th scope="col">Succeess/Fail Percentage</th>
         <th scope="col">Requests Per Second</th>
-        <th scope="col">Data Reference</th>
 
       </tr>
       <!--Table columns end -->
     </thead>
-    <tbody>
+    <tbody *ngIf="swaggerSummaryId">
       <tr *ngFor="let d of resultSummary">
         <th scope="row"></th>
-        <td *ngIf="swaggerSumaryId">{{swaggerSummary.id}}</td>
         <td>{{d.id}}</td>
         <td>{{d.uri}}</td>
         <td>{{d.httpMethod}}</td>
@@ -77,7 +74,6 @@
         <td>{{d.failCount}}</td>
         <td>{{d.successFailPercentage}}</td>
         <td>{{d.reqPerSec}}</td>
-        <td>{{d.dataReference}}</td>
       </tr>
     </tbody>
   </table> 

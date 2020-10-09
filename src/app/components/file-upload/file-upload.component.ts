@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 import {
-  Component, OnInit, ViewChild, ElementRef
+  Component, OnInit, ViewChild, ElementRef, EventEmitter
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import yaml from 'js-yaml';
@@ -30,7 +30,7 @@ export class FileUploadComponent implements OnInit {
 
   public loadTestConfig: string;
 
-  public formData: FormData;
+  public formData: FormData = new FormData();
 
   public sessionStorage: Storage;
 
@@ -48,6 +48,8 @@ export class FileUploadComponent implements OnInit {
 
   public window: Window;
 
+  public eventEmitter: EventEmitter<Event>;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -58,6 +60,8 @@ export class FileUploadComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       swaggerFile: [''],
     });
+
+    sessionStorage.clear();
   }
 
   getFileExtension(file: File): string {
@@ -171,7 +175,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    this.loadTestConfig = this.window.sessionStorage.getItem('loadTestConfig');
+    this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
     this.formData.append('file', this.uploadForm.get('swaggerFile').value);
     this.formData.append('LoadTestConfig', this.loadTestConfig);
     console.log('Posting Swagger File');
@@ -182,7 +186,7 @@ export class FileUploadComponent implements OnInit {
     await this.timeout();
     console.log('Timeout Complete');
     await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
-    this.window.sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
     this.router.navigateByUrl('/results-summary');
   }
 

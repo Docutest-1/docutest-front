@@ -49,7 +49,7 @@ export class StartLoadTestWidgetComponent {
       );
       sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     } else {
-      this.LTC = new LoadTestConfig('Default', 0, 10, 10, 10, true);
+      this.LTC = new LoadTestConfig('Default', -1, 10, 10, 10, false);
       sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     }
     if (
