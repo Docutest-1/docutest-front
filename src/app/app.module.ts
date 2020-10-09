@@ -25,6 +25,7 @@ import { HttpTableComponent } from './components/http-table/http-table.component
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import { GenericD3Component } from './components/generic-d3/generic-d3.component';
 import { HttpStatusDonutChartComponent } from './components/http-status-donut-chart/http-status-donut-chart.component';
+import { HttpStatusCircleChartComponent } from './components/http-status-circle-chart/http-status-circle-chart.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HttpStatusDonutChartComponent } from './components/http-status-donut-ch
     StartLoadTestWidgetComponent,
     GenericD3Component,
     HttpStatusDonutChartComponent,
+    HttpStatusCircleChartComponent,
   ],
   imports: [
     CommonModule,

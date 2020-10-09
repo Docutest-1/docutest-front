@@ -56,7 +56,7 @@ export class HttpStatusDonutChartComponent implements OnInit {
   createColors() {
     this.color = d3.scaleOrdinal()
       .domain(this.dummy_data.map((d) => d.abs.toString()))
-      .range(['#c7d3ec', '#a5b8db', '#879cc4', '#677795', '#5a6782']);
+      .range(['#39DB80', '#C0EBCB']);
   }
 
   ngOnInit() {
@@ -77,8 +77,8 @@ export class HttpStatusDonutChartComponent implements OnInit {
       .enter()
       .append('path')
       .attr('d', d3.arc().innerRadius(80).outerRadius(this.radius))
-      .attr('fill', (d, i) => (this.color(i)))
-      .attr('stroke', '#121926')
-      .style('stroke-width', '1px');
+      .attr('fill', (d, i) => (this.color(i)));
+    // .attr('stroke', '#121926')
+    // .style('stroke-width', '1px');
   }
 }
