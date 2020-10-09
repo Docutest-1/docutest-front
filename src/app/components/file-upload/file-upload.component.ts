@@ -1,17 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 import {
-  Component, OnInit, ViewChild, ElementRef
+  Component, OnInit, ViewChild, ElementRef, EventEmitter
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import yaml from 'js-yaml';
 import { Router } from '@angular/router';
 import { SwaggerService } from 'src/app/services/swagger.service';
 import { Swag } from '../../models/swag';
 import { SwaggerUploadResponse } from '../../models/swagger-upload-response/swagger-upload-response';
 import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
-
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -30,6 +28,12 @@ export class FileUploadComponent implements OnInit {
 
   public regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
 
+  public loadTestConfig: string;
+
+  public formData: FormData = new FormData();
+
+  public sessionStorage: Storage;
+
   public secondsUntilETA: number;
 
   public swaggerSummary: SwaggerSummary;
@@ -42,13 +46,22 @@ export class FileUploadComponent implements OnInit {
 
   public swag: Swag;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,
-    private router: Router, private swaggerService: SwaggerService) {}
+  public window: Window;
+
+  public eventEmitter: EventEmitter<Event>;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private swaggerService: SwaggerService,
+  ) {}
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
       swaggerFile: [''],
     });
+
+    sessionStorage.clear();
   }
 
   getFileExtension(file: File): string {
@@ -162,17 +175,13 @@ export class FileUploadComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('swaggerFile').value);
-    formData.append('LoadTestConfig', '{ "testPlanName" : "ThreeEndpointTest", "loops" : -1, "duration" : 10, "threads" : 10, "rampUp" : 2,  "followRedirects" : true }');
-    // this.http.post<SwaggerUploadResponse>(`${this.baseUrl}/upload`, formData).subscribe(
-    //   (res) => console.log(res),
-    //   (err) => console.log(err),
-    // );
+    this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
+    this.formData.append('file', this.uploadForm.get('swaggerFile').value);
+    this.formData.append('LoadTestConfig', this.loadTestConfig);
     console.log('Posting Swagger File');
-    const swaggerResponse = await this.swaggerService.uploadSwaggerFile(formData);
+    const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
     console.log('Received Swagger Response:', swaggerResponse);
-    this.secondsUntilETA = (swaggerResponse.eta - new Date().getTime());
+    this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
     console.log('Estimated ETA:', this.secondsUntilETA * 1000);
     await this.timeout();
     console.log('Timeout Complete');

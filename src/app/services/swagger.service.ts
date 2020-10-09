@@ -42,9 +42,7 @@ export class SwaggerService {
   }
 
   async loadSummaryInTable(swaggerSummaryId: number): Promise <SwaggerSummary> {
-    const re = await this.http.get<SwaggerSummary>(`http://localhost:8083/Docutest/swaggersummary/${swaggerSummaryId}`, {
-
-    }).toPromise();
+    const re = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/swaggersummary/${swaggerSummaryId}`).toPromise();
     return re;
   }
 }

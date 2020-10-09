@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoadTestConfig } from 'src/app/models/loadTestConfig';
-
 @Component({
   selector: 'app-start-load-test-widget',
   templateUrl: './start-load-test-widget.component.html',
@@ -47,10 +47,11 @@ export class StartLoadTestWidgetComponent {
         this.advanceForm.get('rampUp').value,
         this.advanceForm.get('followRedirect').value,
       );
+      sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     } else {
-      this.LTC = new LoadTestConfig('Default', 0, 10, 10, 10, true);
+      this.LTC = new LoadTestConfig('Default', -1, 10, 10, 10, false);
+      sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     }
-
     if (
       this.LTC.loops == null
       || this.LTC.duration == null
