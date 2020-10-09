@@ -5,7 +5,8 @@
 // eslint-disable-next-line import/prefer-default-export
 export const environment = {
   production: false,
-  API_BASE_URL: 'http://ec2-3-92-91-194.compute-1.amazonaws.com/'
+  API_BASE_URL: 'http://localhost',
+  PORT: 4200
 };
 
 /*
