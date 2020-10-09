@@ -20,7 +20,7 @@ export class SwaggerService {
   constructor(private http: HttpClient) { }
 
   async uploadSwaggerFile(formData: FormData): Promise <SwaggerUploadResponse> {
-    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/upload`, formData).toPromise();
+    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/upload`, formData, { withCredentials: true }).toPromise();
     return swaggerResponse;
   }
 
@@ -30,7 +30,7 @@ export class SwaggerService {
     while (!receivedSummary) {
       /* eslint-disable no-await-in-loop */
 
-      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/${swaggerResponse.resultRef}`).toPromise();
+      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/${swaggerResponse.resultRef}`, { withCredentials: true }).toPromise();
       /* eslint-enable no-await-in-loop */
       if (this.swaggerSummary.resultsummaries.length) {
         console.log(this.swaggerSummary);
@@ -42,9 +42,7 @@ export class SwaggerService {
   }
 
   async loadSummaryInTable(swaggerSummaryId: number): Promise <SwaggerSummary> {
-    const re = await this.http.get<SwaggerSummary>(`http://localhost:8083/Docutest/swaggersummary/${swaggerSummaryId}`, {
-
-    }).toPromise();
+    const re = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/swaggersummary/${swaggerSummaryId}`, { withCredentials: true }).toPromise();
     return re;
   }
 }
