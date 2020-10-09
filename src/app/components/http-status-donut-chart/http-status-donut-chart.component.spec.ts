@@ -10,7 +10,7 @@ describe('HttpStatusDonutChartComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HttpStatusDonutChartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
