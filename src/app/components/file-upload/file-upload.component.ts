@@ -40,7 +40,7 @@ export class FileUploadComponent implements OnInit {
 
   public loadTestConfig: string;
 
-  public formData: FormData;
+  public formData: FormData = new FormData();
 
   public sessionStorage: Storage;
 
@@ -57,6 +57,8 @@ export class FileUploadComponent implements OnInit {
   private swag: Swag;
 
   private eventEmitter: EventEmitter<Event>;
+
+  public eventEmitter: EventEmitter<Event>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -199,7 +201,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    this.loadTestConfig = this.window.sessionStorage.getItem('loadTestConfig');
+    this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
     this.formData.append('file', this.uploadForm.get('swaggerFile').value);
     this.formData.append('LoadTestConfig', this.loadTestConfig);
     console.log('Posting Swagger File');
@@ -210,7 +212,7 @@ export class FileUploadComponent implements OnInit {
     await this.timeout();
     console.log('Timeout Complete');
     await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
-    this.window.sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
     this.router.navigateByUrl('/results-summary');
   }
 
