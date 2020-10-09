@@ -15,6 +15,6 @@ export class HttpTableComponent {
   constructor() {
     Object.assign(this, { data });
     this.successes = this.data.failCount / (this.data.successFailPercentage / 100)
-      - this.data.failCount; 
+      - this.data.failCount;
   }
 }
