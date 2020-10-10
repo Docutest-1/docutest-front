@@ -24,6 +24,7 @@ import { StartLoadTestWidgetComponent } from './components/start-load-test-widge
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { DemoTableComponent } from './components/demo-table/demo-table.component';
 import { ResultsSummaryComponent } from './pages/results-summary/results-summary.component';
+import { UploadComponent } from './pages/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ResultsSummaryComponent } from './pages/results-summary/results-summary
     StartLoadTestWidgetComponent,
     DemoTableComponent,
     ResultsSummaryComponent,
+    UploadComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoadTestConfig } from 'src/app/models/loadTestConfig';
 @Component({
@@ -27,6 +27,8 @@ export class StartLoadTestWidgetComponent {
   public msgShowError = false;
 
   public msgShowSuccess = false;
+
+  @Output() myEvent: EventEmitter<boolean> = new EventEmitter();
 
   public advanceForm = new FormGroup({
     planName: new FormControl(''),
@@ -61,6 +63,7 @@ export class StartLoadTestWidgetComponent {
       this.errorMessage('Please use numbers');
     } else {
       this.submit();
+      this.myEvent.emit(true);
     }
   }
 
