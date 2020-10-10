@@ -1,6 +1,6 @@
 <div class="container">
   <div class="child">
-    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="uploadForm">
       <div>
         <input
           class="file-input"
@@ -8,17 +8,15 @@
           accept=".yaml,.json"
           name="swaggerFile"
           (change)="onFileSelect($event)"
+          
         />
       </div>
       <div>
-        <button class="btn btn-primary" type="submit">
-          Upload
+        <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modal2">
+          Start Test
         </button>
       </div>
     </form>
-    <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modal2">
-      STLW
-    </button>
   </div>
   
   <div class="child">

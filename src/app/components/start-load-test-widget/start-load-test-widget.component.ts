@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { NgxsOnInit } from '@ngxs/store';
 import { LoadTestConfig } from 'src/app/models/loadTestConfig';
 @Component({
   selector: 'app-start-load-test-widget',
@@ -17,6 +18,8 @@ export class StartLoadTestWidgetComponent {
   public advance = false;
 
   public click = false;
+  
+  public allowRedirect = true;
 
   public indexValue = 0;
 
@@ -27,6 +30,8 @@ export class StartLoadTestWidgetComponent {
   public msgShowError = false;
 
   public msgShowSuccess = false;
+
+  @Output() myEvent: EventEmitter<boolean> = new EventEmitter();
 
   public advanceForm = new FormGroup({
     planName: new FormControl(''),
@@ -61,6 +66,7 @@ export class StartLoadTestWidgetComponent {
       this.errorMessage('Please use numbers');
     } else {
       this.submit();
+      this.myEvent.emit(true);
     }
   }
 
@@ -76,7 +82,7 @@ export class StartLoadTestWidgetComponent {
   }
 
   stopTimer(): void {
-    this.running = false;
+    this.stop();
     this.time = 0;
     clearInterval(this.interval);
   }
@@ -112,4 +118,8 @@ export class StartLoadTestWidgetComponent {
     this.running = false;
     this.click = false;
   }
+
+  changeRedirect() {
+    this.allowRedirect = !this.allowRedirect;
+}
 }
