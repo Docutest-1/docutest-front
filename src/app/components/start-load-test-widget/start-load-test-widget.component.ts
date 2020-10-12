@@ -67,6 +67,7 @@ export class StartLoadTestWidgetComponent {
     } else {
       this.submit();
       this.myEvent.emit(true);
+      console.log('event emitted');
     }
   }
 
@@ -88,6 +89,7 @@ export class StartLoadTestWidgetComponent {
   }
 
   submit(): void {
+    console.log('submit entered');
     this.running = true;
     this.startTimer();
   }
