@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -120,5 +121,11 @@ export class StartLoadTestWidgetComponent {
 
   changeRedirect() {
     this.allowRedirect = !this.allowRedirect;
+  }
+
+  cancel(): void {
+    this.time = 0;
+    this.stop();
+    location.reload();
   }
 }
