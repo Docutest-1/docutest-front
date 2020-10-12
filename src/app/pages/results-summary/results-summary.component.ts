@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-results-summary',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class ResultsSummaryComponent {
 
+  constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
+    // eslint-disable-next-line no-undef
+    if (sessionStorage.getItem('swaggerSummaryId') == null) {
+      this.router.navigateByUrl('/upload');
+    }
+  }
 }

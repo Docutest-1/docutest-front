@@ -26,7 +26,7 @@ export class DemoTableComponent implements OnInit {
     const re = await this.swaggerService.loadSummaryInTable(this.swaggerSummaryId);
     this.swaggerSummary = re;
     this.resultSummary = re.resultsummaries;
-    sessionStorage.removeItem('swaggerSummaryId');
-    return this.swaggerSummary;
+   // sessionStorage.removeItem('swaggerSummaryId');
+   return this.swaggerSummary;
   }
 }

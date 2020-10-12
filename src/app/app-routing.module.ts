@@ -7,7 +7,8 @@ import { UploadComponent } from './pages/upload/upload.component';
 const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'results-summary', component: ResultsSummaryComponent }
+  { path: 'results-summary', component: ResultsSummaryComponent },
+  { path: '**', redirectTo: 'upload', pathMatch: 'full' }
 
 ];
 
