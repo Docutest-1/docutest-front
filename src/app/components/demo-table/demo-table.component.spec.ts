@@ -1,25 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/* eslint-disable prefer-const */
+import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { SwaggerService } from 'src/app/services/swagger.service';
 
 import { DemoTableComponent } from './demo-table.component';
 
 describe('DemoTableComponent', () => {
   let component: DemoTableComponent;
-  let fixture: ComponentFixture<DemoTableComponent>;
+  let service: SwaggerService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DemoTableComponent]
-    })
-      .compileComponents();
-  });
+  class MockSwaggerService {
+
+  }
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [DemoTableComponent, { provide: SwaggerService, useClass: MockSwaggerService }],
+    });
+    component = TestBed.inject(DemoTableComponent);
+    service = TestBed.inject(SwaggerService);
   });
 
-  it('should create', () => {
+  afterEach(() => {
+    component = null;
+    service = null;
+  });
+
+  it('should be created', async () => {
     expect(component).toBeTruthy();
   });
 });

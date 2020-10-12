@@ -1,22 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 import { ResultsSummaryComponent } from './results-summary.component';
 
 describe('ResultsSummaryComponent', () => {
   let component: ResultsSummaryComponent;
-  let fixture: ComponentFixture<ResultsSummaryComponent>;
+  let router: Router;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ResultsSummaryComponent]
-    })
-      .compileComponents();
-  });
+  class MockRouter {
+
+  }
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResultsSummaryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [ResultsSummaryComponent, { provide: Router, useClass: MockRouter }],
+    });
+    component = TestBed.inject(ResultsSummaryComponent);
+    router = TestBed.inject(Router);
+  });
+
+  afterEach(() => {
+    component = null;
+    router = null;
   });
 
   it('should create', () => {
