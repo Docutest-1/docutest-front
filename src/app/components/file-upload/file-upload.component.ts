@@ -187,7 +187,6 @@ export class FileUploadComponent implements OnInit {
     console.log('Timeout Complete');
     sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
     await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
-    $('#modal2').modal('hide');
     this.router.navigateByUrl('/results-summary');
   }
 
