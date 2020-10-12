@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import yaml from 'js-yaml';
 import { Router } from '@angular/router';
+import { Swag } from '../../models/swag';
 
 @Component({
   selector: 'app-file-upload',
@@ -14,8 +15,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./file-upload.component.scss'],
 })
 export class FileUploadComponent implements OnInit {
-  private baseUrl = 'http://localhost:8083/Docutest';
-
   public uploadForm: FormGroup;
 
   public selectedFile: File;
@@ -32,9 +31,7 @@ export class FileUploadComponent implements OnInit {
   @ViewChild('fileIn')
   fileInput: ElementRef;
 
-  public swag: any;
-
-  public paths: Array<any>;
+  public swag: Swag;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, public router: Router) {
   }
@@ -45,7 +42,7 @@ export class FileUploadComponent implements OnInit {
     });
   }
 
-  getFileExtension(file): string {
+  getFileExtension(file: File): string {
     return file.name.match(this.regex)[0];
   }
 
@@ -101,13 +98,6 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  /** After clicking the button */
-  onSubmit(): void {
-    this.paths = Object.keys(this.swag.paths);
-    localStorage.setItem('swagPaths', JSON.stringify(this.paths));
-    this.router.navigateByUrl('/dashboard');
-  }
-
   displayErrorMsg(): void {
     this.show = true;
     if (this.fileInput) {
@@ -117,7 +107,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   /** Validates swagger version: Specifies the Swagger Specification version being used. */
-  swaggerVersionValidator(swag): void {
+  swaggerVersionValidator(swag: Swag): void {
     if (swag.swagger !== '2.0' && swag.swagger !== '3.0') {
       this.errorMsg = 'Error: You have the wrong swagger version.';
       this.displayErrorMsg();
@@ -128,8 +118,8 @@ export class FileUploadComponent implements OnInit {
     Validates info: Provides metadata about the API.
     The metadata can be used by the clients if needed.
   */
-  swaggerInfoValidator(swag): void {
-    if (swag.info === undefined) {
+  swaggerInfoValidator(swag: Swag): void {
+    if (swag.info === null || swag.info === undefined) {
       this.errorMsg = 'Error: There are no provided info.';
       this.displayErrorMsg();
     }
@@ -139,7 +129,7 @@ export class FileUploadComponent implements OnInit {
     Validates host: It MUST be the host only and does not include the scheme nor sub-paths.
     It MAY include a port.
   */
-  swaggerHostValidator(swag): void {
+  swaggerHostValidator(swag: Swag): void {
     const scheme = 'https://';
     const regex = RegExp('^(.+)/([^/]+)$');
     if (swag.host) {
@@ -153,7 +143,7 @@ export class FileUploadComponent implements OnInit {
   /**
     Validates base path: The value MUST start with a leading slash /.
   */
-  swaggerBasePathValidator(swag): void {
+  swaggerBasePathValidator(swag: Swag): void {
     if (swag.basePath) {
       if (!(swag.basePath.includes('/'))) {
         this.errorMsg = 'Error: Invalid base path.';

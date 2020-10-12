@@ -19,7 +19,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
-import { LeftColumnComponent } from './components/left-column/left-column.component';
 import { HttpTableComponent } from './components/http-table/http-table.component';
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
@@ -31,7 +30,6 @@ import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
     DashboardComponent,
     LineChartComponent,
     FileUploadComponent,
-    LeftColumnComponent,
     HttpTableComponent,
     StartLoadTestWidgetComponent,
   ],

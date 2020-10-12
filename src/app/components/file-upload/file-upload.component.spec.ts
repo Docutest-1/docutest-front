@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Swag } from 'src/app/models/swag';
 import { FileUploadComponent } from './file-upload.component';
 
 describe('FileUploadComponent', () => {
@@ -22,7 +23,7 @@ describe('FileUploadComponent', () => {
   const jsonFile = new File(fakeDataArr, 'fakeFile.json', { type: 'application/json' });
   const yamlFile = new File(fakeDataArr, 'fakeFile.yaml', { type: 'text/yaml' });
   const ymlFile = new File(fakeDataArr, 'fakeFile.yml', { type: 'text/yaml' });
-  // const swag = { paths: [{ route1: null }, { route2: null }, { route3: null }] };
+  const swag = new Swag();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -49,18 +50,6 @@ describe('FileUploadComponent', () => {
     fixture.detectChanges();
 
     expect(component.uploadForm.value).toEqual({ swaggerFile: '' });
-  });
-
-  it('should set swag paths in local storage and redirect user to dashboard', () => {
-    component.swag = { paths: [{ route1: null }, { route2: null }, { route3: null }] };
-    component.swag.paths = JSON.stringify(component.swag.paths);
-    spyOn(localStorage, 'setItem');
-    spyOn(component.router, 'navigateByUrl');
-    component.onSubmit();
-
-    expect(component.paths).toEqual(Object.keys(component.swag.paths));
-    expect(localStorage.setItem).toHaveBeenCalledWith('swagPaths', JSON.stringify(Object.keys(component.swag.paths)));
-    expect(component.router.navigateByUrl).toHaveBeenCalledWith('/dashboard');
   });
 
   it('should get file on upload, get extension from file name, and invoke json parser', () => {
@@ -134,11 +123,6 @@ describe('FileUploadComponent', () => {
 
   it('should validate the json file', () => {
     component.selectedFile = jsonFile;
-    component.swag = JSON.stringify({
-      swag: {
-        swagger: '2.0', info: true, host: 'localhost:8080', basepath: '/home'
-      }
-    });
     component.jsonParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -155,11 +139,6 @@ describe('FileUploadComponent', () => {
 
   it('should validate the yaml file', () => {
     component.selectedFile = yamlFile;
-    component.swag = {
-      swag: {
-        swagger: '2.0', info: true, host: 'localhost:8080', basepath: '/home'
-      }
-    };
     component.yamlParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -175,80 +154,88 @@ describe('FileUploadComponent', () => {
   });
 
   it('should check for version 2.0 on swagger doc and if valid will do nothing', () => {
-    component.swaggerVersionValidator({ swag: { swagger: '2.0' } });
+    swag.swagger = '2.0';
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for version 3.0 on swagger doc and if valid will do nothing', () => {
-    component.swaggerVersionValidator({ swag: { swagger: '3.0' } });
+    swag.swagger = '3.0';
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for version on swagger doc and if invalid will set and error message and invoke displayErrorMsg()', () => {
-    component.swaggerVersionValidator({ swag: { swagger: '1.0' } });
+    swag.swagger = '1.0';
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for info on swagger doc and if valid will do nothing', () => {
-    component.swaggerVersionValidator({ swag: { info: true } });
+    swag.info = 'true';
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for info on swagger doc and display an error message', () => {
-    component.swaggerVersionValidator({ swag: { info: undefined } });
+    swag.info = undefined;
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for info on swagger doc and if invalid will set and error message and invoke displayErrorMsg()', () => {
-    component.selectedFile = jsonFile;
-    component.swaggerInfoValidator(jsonFile);
+    swag.info = 'true';
+    component.swaggerInfoValidator(swag);
     spyOn(component, 'swaggerInfoValidator');
 
     expect(component.swaggerInfoValidator).toHaveBeenCalledTimes(0);
   });
 
   it('should check for host on swagger doc and if valid will do nothing', () => {
-    component.swaggerVersionValidator({ swag: { host: 'localhost:8080' } });
+    swag.host = 'localhost:8080';
+    component.swaggerVersionValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for host on swagger doc and if invalid will set and error message and invoke displayErrorMsg()', () => {
-    component.selectedFile = jsonFile;
-    component.swaggerHostValidator(jsonFile);
+    swag.host = 'https://';
+    component.swaggerHostValidator(swag);
     spyOn(component, 'swaggerHostValidator');
 
     expect(component.swaggerHostValidator).toHaveBeenCalledTimes(0);
   });
 
   it('should check for host on swagger doc', () => {
-    component.swaggerHostValidator({ swag: { host: 'https://' } });
+    swag.host = 'https://';
+    component.swaggerHostValidator(swag);
     spyOn(component, 'swaggerHostValidator');
 
     expect(component.swaggerHostValidator).toHaveBeenCalledTimes(0);
   });
 
   it('should check for base path on swagger doc and if valid will do nothing', () => {
-    component.swaggerVersionValidator({ swag: { basePath: '/' } });
+    swag.basePath = '/';
+    component.swaggerBasePathValidator(swag);
     spyOn(component, 'displayErrorMsg');
 
     expect(component.displayErrorMsg).toHaveBeenCalledTimes(0);
   });
 
   it('should check for base path on swagger doc and if invalid will set and error message and invoke displayErrorMsg()', () => {
-    component.selectedFile = jsonFile;
-    component.swaggerBasePathValidator(jsonFile);
+    swag.basePath = '';
+    component.swaggerBasePathValidator(swag);
     spyOn(component, 'swaggerBasePathValidator');
 
     expect(component.swaggerBasePathValidator).toHaveBeenCalledTimes(0);
