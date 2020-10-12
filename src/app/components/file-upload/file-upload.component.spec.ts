@@ -1,45 +1,52 @@
-import {
-  async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync
-} from '@angular/core/testing';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Swag } from 'src/app/models/swag';
+/* eslint-disable prefer-const */
+/* eslint-disable max-classes-per-file */
+import { TestBed, inject } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+
+import { SwaggerService } from 'src/app/services/swagger.service';
+import { Router } from '@angular/router';
 import { FileUploadComponent } from './file-upload.component';
 
 describe('FileUploadComponent', () => {
   let component: FileUploadComponent;
-  let fixture: ComponentFixture<FileUploadComponent>;
-  let httpMock: HttpClientTestingModule;
-  let httpClient: HttpClient;
-  let store: MockStore;
-  const formBuilder: FormBuilder = new FormBuilder();
-  const initialState = { graph: false };
-  const fakeData = new Blob(['']);
-  const fakeDataArr = new Array<Blob>();
-  fakeDataArr.push(fakeData);
-  const jsonFile = new File(fakeDataArr, 'fakeFile.json', { type: 'application/json' });
-  const yamlFile = new File(fakeDataArr, 'fakeFile.yaml', { type: 'text/yaml' });
-  const ymlFile = new File(fakeDataArr, 'fakeFile.yml', { type: 'text/yaml' });
-  const swag = new Swag();
+  let service: SwaggerService;
+  let formBuilder: FormBuilder;
+  let router: Router;
 
-  beforeEach(async(() => {
+  class MockSwaggerService {
+
+  }
+
+  class MockFormBuilder {
+
+  }
+
+  class MockRouter {
+
+  }
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FileUploadComponent],
-      providers: [FormBuilder, { useValue: formBuilder }, provideMockStore({ initialState })],
-      imports: [HttpClientTestingModule, RouterTestingModule]
-    }).compileComponents();
+      providers: [FileUploadComponent, { provide: SwaggerService, useClass: MockSwaggerService },
+        { provide: FormBuilder, useClass: MockFormBuilder },
+        { provide: Router, useClass: MockRouter },
+      ],
+    });
 
-    fixture = TestBed.createComponent(FileUploadComponent);
-    component = fixture.componentInstance;
-    httpMock = TestBed.inject(HttpTestingController);
-    httpClient = TestBed.inject(HttpClient);
-    store = TestBed.inject(MockStore);
-  }));
+    component = TestBed.inject(FileUploadComponent);
+    service = TestBed.inject(SwaggerService);
+    formBuilder = TestBed.inject(FormBuilder);
+    router = TestBed.inject(Router);
+  });
 
-  it('should create', () => {
+  afterEach(() => {
+    component = null;
+    service = null;
+    formBuilder = null;
+    router = null;
+  });
+
+  it('should be created', async () => {
     expect(component).toBeTruthy();
   });
 

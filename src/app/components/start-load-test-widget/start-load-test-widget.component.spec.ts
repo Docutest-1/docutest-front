@@ -100,13 +100,6 @@ describe('start-load-test-widget', () => {
 
     expect(comp.advance).toEqual(true);
   });
-  it('#startTest() if advance is set to false creates default LTC', () => {
-    const comp = new StartLoadTestWidgetComponent();
-    comp.advance = false;
-    comp.startTest();
-
-    expect(comp.LTC).toEqual(new LoadTestConfig('Default', 0, 10, 10, 10, true));
-  });
 
   it('#stop() changes boolean of running and click to false', () => {
     const comp = new StartLoadTestWidgetComponent();
@@ -121,6 +114,13 @@ describe('start-load-test-widget', () => {
     expect(comp.click).toEqual(false);
   });
 
+  it('#startTest() if advance is set to false creates default LTC', () => {
+    const comp = new StartLoadTestWidgetComponent();
+    comp.advance = false;
+    comp.startTest();
+
+    expect(comp.LTC).toEqual(new LoadTestConfig('Default', -1, 10, 10, 10, false));
+  });
 
   it('#startTest() if advance is set to true it calls #submit()', () => {
     const comp = new StartLoadTestWidgetComponent();

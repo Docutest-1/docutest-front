@@ -1,8 +1,5 @@
 /* eslint-disable no-undef */
-import {
-  Component, OnInit
-} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { SwaggerService } from 'src/app/services/swagger.service';
 import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
 import { ResultSummary } from '../../models/result-summary/result-summary';
@@ -13,7 +10,7 @@ import { ResultSummary } from '../../models/result-summary/result-summary';
   styleUrls: ['./demo-table.component.scss']
 })
 export class DemoTableComponent implements OnInit {
-  constructor(private http: HttpClient, private swaggerService: SwaggerService) { }
+  constructor(private swaggerService: SwaggerService) { }
 
   public swaggerSummary : SwaggerSummary;
 
@@ -26,7 +23,7 @@ export class DemoTableComponent implements OnInit {
     const re = await this.swaggerService.loadSummaryInTable(this.swaggerSummaryId);
     this.swaggerSummary = re;
     this.resultSummary = re.resultsummaries;
-   // sessionStorage.removeItem('swaggerSummaryId');
-   return this.swaggerSummary;
+    // sessionStorage.removeItem('swaggerSummaryId');
+    return this.swaggerSummary;
   }
 }

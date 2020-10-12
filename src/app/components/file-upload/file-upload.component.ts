@@ -190,7 +190,7 @@ export class FileUploadComponent implements OnInit {
     this.router.navigateByUrl('/results-summary');
   }
 
-  timeout(): Promise<any> {
+  async timeout(): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, this.secondsUntilETA));
   }
 }
