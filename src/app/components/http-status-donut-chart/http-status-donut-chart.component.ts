@@ -8,9 +8,9 @@ import * as d3 from 'd3';
   styleUrls: ['./http-status-donut-chart.component.scss'],
 })
 export class HttpStatusDonutChartComponent implements OnInit {
-  height = 200;
+  height = 150;
 
-  width = 200;
+  width = 150;
 
   margin = 10;
 

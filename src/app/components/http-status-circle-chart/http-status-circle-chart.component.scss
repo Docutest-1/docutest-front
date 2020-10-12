@@ -3,6 +3,11 @@ path {
 }
 
 .circle-chart {
-    width: 20%;
+    width: 100%;
 }
-  
+
+
+.chart-container {
+    display: inline-block;
+    margin: 0 auto;
+}

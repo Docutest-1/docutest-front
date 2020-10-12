@@ -25,6 +25,7 @@ module.exports = {
         project: ["tsconfig.app.json"]
       },
       plugins: ['@angular-eslint/template', 'html'],
+      env: { browser: true },
       processor: '@angular-eslint/template/extract-inline-html',
       rules: {
         '@typescript-eslint/comma-dangle': 'off',

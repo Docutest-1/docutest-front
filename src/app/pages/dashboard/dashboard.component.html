@@ -1,16 +1,24 @@
 <div class="px-0 container-fluid">
-  <app-left-column></app-left-column>
-  <app-http-table></app-http-table>
   <div class="col-sm-9 offset-3">
     <div class="row">
       <div class="col-sm-12">
         <app-file-upload></app-file-upload>
       </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <app-http-status-circle-chart></app-http-status-circle-chart>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let endpoint of endpoints; index as i;">
+        <div>
+          <app-http-status-circle-chart
+          [pieChartData]=endpoint.data
+          [pieChartName]=endpoint.title
+        ></app-http-status-circle-chart>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-sm-12">
+        <app-tree-map></app-tree-map>
+      </div>
+    </div> -->
     </div>
   </div>

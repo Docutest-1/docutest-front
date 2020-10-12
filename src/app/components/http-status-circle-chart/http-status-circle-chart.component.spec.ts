@@ -8,9 +8,9 @@ describe('HttpStatusCircleChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HttpStatusCircleChartComponent ]
+      declarations: [HttpStatusCircleChartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

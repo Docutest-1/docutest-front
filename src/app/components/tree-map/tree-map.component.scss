@@ -1,0 +1,36 @@
+.tree-map-container {
+    min-height: 100%;
+}
+
+.chart {
+    min-height: 100%;
+    min-width: 100%;
+    // padding-top: 5%;
+    // padding-bottom: 5%;
+    // padding-left: 3%;
+    // padding-right: 3%;
+}
+
+rect {
+    // fill: cadetblue;
+    opacity: 0.3;
+    stroke: white;
+  }
+// text {
+//     font-family: "Helvetica Neue", Helvetica, sans-serif;
+//     fill: white;
+//   }
+
+.interactable:hover {
+    fill: blue;
+    cursor: pointer;
+}
+
+.interactable:hover ~ .interactable {
+    opacity: 1;
+}
+
+.tree-map-title {
+    font-size: 100%;
+    // fill: white;
+}
