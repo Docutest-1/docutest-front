@@ -1,0 +1,79 @@
+
+.dash-container {
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 2%;
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    max-height: 100%;
+    grid-auto-columns: 1fr 1fr;
+    // background-color: blue;
+    // flex-direction: column;
+    // min-height: calc(100% - $navbar-height);
+    background-color: #e2e2e2;
+    column-gap: 1%;
+    overflow: hidden;
+}
+
+.box-chart-container {
+    background-color: white;
+    // margin-top: 40px;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    // grid-area: box-chart;
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.treemap-container {
+    grid-column: 1;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.endpoint-dash-container {
+    display: grid;
+    // grid-template-areas: 
+    //     "endpoint-overview endpoint-overview"
+    //     "box-chart circle-chart"
+    //     "another-chart another-chart";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    min-width: 100%;
+    max-width: 100%;
+    grid-column: 2;
+    align-items: center;
+    justify-items: center;
+    row-gap: 1%;
+    column-gap: 1%;
+}
+
+.endpoint-overview-container {
+    // grid-area: endpoint-overview;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    min-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background-color: white;
+    // margin-top: 5%;
+}
+
+.sudo-card {
+    padding: 3%;
+}
+
+.circle-chart-container {
+    min-width: 100%;
+    min-height: 100%;
+    // margin-top: 40px;
+    // grid-area: circle-chart;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    background-color: white;
+}
+    // flex-direction: column;

@@ -1,27 +1,40 @@
 export class ResultSummary {
-  id: number;
+  dataReference: string;
 
-  uri: string;
+  failCount: number;
 
   httpMethod: string;
+
+  id: number;
+
+  reqPerSec: number;
 
   response25Percentile: number;
 
   response50Percentile: number;
 
-  responseAvg: number;
-
   response75Percentile: number;
+
+  responseAvg: number;
 
   responseMax: number;
 
-  failCount: number;
-
   successFailPercentage: number;
 
-  reqPerSec: number;
+  uri: string;
 
-  dataReference: string;
+  // dataReference: null
+  // failCount: 0
+  // httpMethod: "GET"
+  // id: 1
+  // reqPerSec: 9.097525473071325
+  // response25Percentile: 274
+  // response50Percentile: 389
+  // response75Percentile: 602
+  // responseAvg: 648
+  // responseMax: 7769
+  // successFailPercentage: 100
+  // uri: "http://blazedemo
 
   constructor();
   constructor(
@@ -65,4 +78,8 @@ export class ResultSummary {
     this.reqPerSec = reqPerSec;
     this.dataReference = dataReference;
   }
+
+  // public setName() {
+  //   this.name = this.uri;
+  // }
 }
