@@ -1,17 +1,27 @@
 /* eslint-disable prefer-const */
 /* eslint-disable max-classes-per-file */
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, ComponentFixture } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
 import { SwaggerService } from 'src/app/services/swagger.service';
 import { Router } from '@angular/router';
+import { Swag } from 'src/app/models/swag';
 import { FileUploadComponent } from './file-upload.component';
 
 describe('FileUploadComponent', () => {
   let component: FileUploadComponent;
+  let fixture: ComponentFixture<FileUploadComponent>;
   let service: SwaggerService;
   let formBuilder: FormBuilder;
   let router: Router;
+
+  const fakeData = new Blob(['']);
+  const fakeDataArr = new Array<Blob>();
+  fakeDataArr.push(fakeData);
+  const jsonFile = new File(fakeDataArr, 'fakeFile.json', { type: 'application/json' });
+  const yamlFile = new File(fakeDataArr, 'fakeFile.yaml', { type: 'text/yaml' });
+  const ymlFile = new File(fakeDataArr, 'fakeFile.yml', { type: 'text/yaml' });
+  const swag = new Swag();
 
   class MockSwaggerService {
 

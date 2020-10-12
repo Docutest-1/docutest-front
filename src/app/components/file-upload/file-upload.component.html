@@ -3,12 +3,12 @@
     <form [formGroup]="uploadForm">
       <div>
         <input
+          #fileIn
           class="file-input"
           type="file"
           accept=".yaml,.json"
           name="swaggerFile"
           (change)="onFileSelect($event)"
-          
         />
       </div>
       <div>
