@@ -64,7 +64,7 @@
         /><br />
       </mat-form-field>
       <section class="example-section">
-        <mat-checkbox class="example-margin" formControlName="followRedirect"
+        <mat-checkbox class="example-margin" value="allowRedirect" (click)="changeRedirect" formControlName="followRedirect"
           >Allow Follow Redirects</mat-checkbox
         >
       </section>

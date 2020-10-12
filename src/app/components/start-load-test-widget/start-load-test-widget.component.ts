@@ -18,6 +18,8 @@ export class StartLoadTestWidgetComponent {
   public advance = false;
 
   public click = false;
+  
+  public allowRedirect = true;
 
   public indexValue = 0;
 
@@ -116,4 +118,8 @@ export class StartLoadTestWidgetComponent {
     this.running = false;
     this.click = false;
   }
+
+  changeRedirect() {
+    this.allowRedirect = !this.allowRedirect;
+}
 }
