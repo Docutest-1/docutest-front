@@ -1,27 +1,27 @@
 export class ResultSummary {
-  id: number;
+  public id: number;
 
-  uri: string;
+  public uri: string;
 
-  httpMethod: string;
+  public httpMethod: string;
 
-  response25Percentile: number;
+  public response25Percentile: number;
 
-  response50Percentile: number;
+  public response50Percentile: number;
 
-  responseAvg: number;
+  public responseAvg: number;
 
-  response75Percentile: number;
+  public response75Percentile: number;
 
-  responseMax: number;
+  public responseMax: number;
 
-  failCount: number;
+  public failCount: number;
 
-  successFailPercentage: number;
+  public successFailPercentage: number;
 
-  reqPerSec: number;
+  public reqPerSec: number;
 
-  dataReference: string;
+  public dataReference: string;
 
   constructor();
   constructor(

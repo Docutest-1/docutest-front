@@ -18,32 +18,29 @@ export class SwaggerService {
 
   public swaggerUploadResponse: SwaggerUploadResponse;
 
+  private uri = `${environment.API_BASE_URL}:${environment.PORT}`;
+
   constructor(private http: HttpClient) { }
 
-  async uploadSwaggerFile(formData: FormData): Promise <SwaggerUploadResponse> {
-    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/upload`, formData).toPromise();
+  async uploadSwaggerFile(formData: FormData): Promise<SwaggerUploadResponse> {
+    const swaggerResponse = await this.http.post<SwaggerUploadResponse>(`${this.uri}/Docutest/upload`, formData).toPromise();
     return swaggerResponse;
   }
 
-  async retrieveSwaggerSummary(swaggerResponse: SwaggerUploadResponse): Promise <SwaggerSummary> {
-    console.log('Entered Swagger Summary Retriever');
+  async retrieveSwaggerSummary(swaggerResponse: SwaggerUploadResponse): Promise<SwaggerSummary> {
     let receivedSummary = false;
     while (!receivedSummary) {
       /* eslint-disable no-await-in-loop */
-
-      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/${swaggerResponse.resultRef}`).toPromise();
-      /* eslint-enable no-await-in-loop */
+      this.swaggerSummary = await this.http.get<SwaggerSummary>(`${this.uri}/${swaggerResponse.resultRef}`).toPromise();
       if (this.swaggerSummary.resultsummaries.length) {
-        console.log(this.swaggerSummary);
         receivedSummary = true;
       }
-      console.log('Swagger Summary Results Summary Length:', this.swaggerSummary.resultsummaries.length);
     }
     return this.swaggerSummary;
   }
 
-  async loadSummaryInTable(swaggerSummaryId: number): Promise <SwaggerSummary> {
-    const re = await this.http.get<SwaggerSummary>(`${environment.API_BASE_URL}:${environment.PORT}/Docutest/swaggersummary/${swaggerSummaryId}`).toPromise();
+  async loadSummaryInTable(swaggerSummaryId: number): Promise<SwaggerSummary> {
+    const re = await this.http.get<SwaggerSummary>(`${this.uri}/Docutest/swaggersummary/${swaggerSummaryId}`).toPromise();
     return re;
   }
 }

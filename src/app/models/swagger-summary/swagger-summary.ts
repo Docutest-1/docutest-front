@@ -1,21 +1,21 @@
 import { ResultSummary } from '../result-summary/result-summary';
 
 export class SwaggerSummary {
-  id: number;
+  public id: number;
 
-  testPlanName: string;
+  public testPlanName: string;
 
-  loops: number;
+  public loops: number;
 
-  duration: number;
+  public duration: number;
 
-  threads: number;
+  public threads: number;
 
-  rampUp: number;
+  public rampUp: number;
 
-  followRedirects: boolean;
+  public followRedirects: boolean;
 
-  resultsummaries: ResultSummary[];
+  public resultsummaries: ResultSummary[];
 
   constructor();
   constructor(

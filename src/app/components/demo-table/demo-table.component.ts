@@ -18,12 +18,14 @@ export class DemoTableComponent implements OnInit {
 
   public resultSummary : ResultSummary[];
 
-  async ngOnInit(): Promise<SwaggerSummary> {
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  async loadData(): Promise<void> {
     this.swaggerSummaryId = Number(sessionStorage.getItem('swaggerSummaryId'));
     const re = await this.swaggerService.loadSummaryInTable(this.swaggerSummaryId);
     this.swaggerSummary = re;
     this.resultSummary = re.resultsummaries;
-    // sessionStorage.removeItem('swaggerSummaryId');
-    return this.swaggerSummary;
   }
 }

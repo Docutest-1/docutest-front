@@ -1,9 +1,9 @@
 export class Swag {
-  swagger: string;
+  public swagger: string;
 
-  host: string;
+  public host: string;
 
-  info: string;
+  public info: string;
 
-  basePath: string;
+  public basePath: string;
 }

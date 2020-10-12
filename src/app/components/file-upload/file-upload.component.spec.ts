@@ -1,20 +1,25 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */
 /* eslint-disable max-classes-per-file */
-import { TestBed, inject, ComponentFixture } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
-
-import { SwaggerService } from 'src/app/services/swagger.service';
-import { Router } from '@angular/router';
+import {
+  async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync
+} from '@angular/core/testing';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Swag } from 'src/app/models/swag';
 import { FileUploadComponent } from './file-upload.component';
 
 describe('FileUploadComponent', () => {
   let component: FileUploadComponent;
   let fixture: ComponentFixture<FileUploadComponent>;
-  let service: SwaggerService;
-  let formBuilder: FormBuilder;
-  let router: Router;
-
+  let httpMock: HttpClientTestingModule;
+  let httpClient: HttpClient;
+  let store: MockStore;
+  const formBuilder: FormBuilder = new FormBuilder();
+  const initialState = { graph: false };
   const fakeData = new Blob(['']);
   const fakeDataArr = new Array<Blob>();
   fakeDataArr.push(fakeData);
@@ -23,40 +28,21 @@ describe('FileUploadComponent', () => {
   const ymlFile = new File(fakeDataArr, 'fakeFile.yml', { type: 'text/yaml' });
   const swag = new Swag();
 
-  class MockSwaggerService {
-
-  }
-
-  class MockFormBuilder {
-
-  }
-
-  class MockRouter {
-
-  }
-
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [FileUploadComponent, { provide: SwaggerService, useClass: MockSwaggerService },
-        { provide: FormBuilder, useClass: MockFormBuilder },
-        { provide: Router, useClass: MockRouter },
-      ],
-    });
+      declarations: [FileUploadComponent],
+      providers: [FormBuilder, { useValue: formBuilder }, provideMockStore({ initialState })],
+      imports: [HttpClientTestingModule, RouterTestingModule]
+    }).compileComponents();
 
-    component = TestBed.inject(FileUploadComponent);
-    service = TestBed.inject(SwaggerService);
-    formBuilder = TestBed.inject(FormBuilder);
-    router = TestBed.inject(Router);
-  });
+    fixture = TestBed.createComponent(FileUploadComponent);
+    component = fixture.componentInstance;
+    httpMock = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
+    store = TestBed.inject(MockStore);
+  }));
 
-  afterEach(() => {
-    component = null;
-    service = null;
-    formBuilder = null;
-    router = null;
-  });
-
-  it('should be created', async () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -75,9 +61,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.json');
+    expect(component['fileExt']).toEqual('.json');
     expect(component.jsonParser).toHaveBeenCalledWith();
     expect(component.yamlParser).not.toHaveBeenCalled();
   });
@@ -88,9 +74,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.yaml');
+    expect(component['fileExt']).toEqual('.yaml');
     expect(component.jsonParser).not.toHaveBeenCalled();
     expect(component.yamlParser).toHaveBeenCalledWith();
   });
@@ -101,9 +87,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.yml');
+    expect(component['fileExt']).toEqual('.yml');
     expect(component.jsonParser).not.toHaveBeenCalled();
     expect(component.yamlParser).toHaveBeenCalledWith();
   });
@@ -120,13 +106,13 @@ describe('FileUploadComponent', () => {
   });
 
   it('selectedFile should contain file', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
 
-    expect(component.selectedFile).not.toBeNull();
+    expect(component['selectedFile']).not.toBeNull();
   });
 
   it('should extract file extension from file name and return it as a string', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     const fileExtTest = component.getFileExtension(jsonFile);
 
     expect(fileExtTest).toEqual('.json');
@@ -139,7 +125,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the json file', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     component.jsonParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -147,7 +133,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the json file and if fails displays error message and resets file upload', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     component.jsonParser();
     spyOn(component, 'jsonParser');
 
@@ -155,7 +141,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the yaml file', () => {
-    component.selectedFile = yamlFile;
+    component['selectedFile'] = yamlFile;
     component.yamlParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -163,7 +149,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the yaml file and if fails displays error message and resets file upload', () => {
-    component.selectedFile = yamlFile;
+    component['selectedFile'] = yamlFile;
     component.yamlParser();
     spyOn(component, 'yamlParser');
 

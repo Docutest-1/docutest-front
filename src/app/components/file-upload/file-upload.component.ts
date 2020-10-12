@@ -18,23 +18,21 @@ import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
 export class FileUploadComponent implements OnInit {
   public uploadForm: FormGroup;
 
-  public selectedFile: File;
+  private selectedFile: File;
 
   public errorMsg: String = '';
 
   public show = false;
 
-  public fileExt: string;
+  private fileExt: string;
 
-  public regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+  private regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
 
-  public loadTestConfig: string;
+  private loadTestConfig: string;
 
-  public formData: FormData = new FormData();
+  private formData: FormData = new FormData();
 
-  public sessionStorage: Storage;
-
-  public secondsUntilETA: number;
+  private secondsUntilETA: number;
 
   public swaggerSummary: SwaggerSummary;
 
@@ -44,11 +42,9 @@ export class FileUploadComponent implements OnInit {
   @ViewChild('fileIn')
   fileInput: ElementRef;
 
-  public swag: Swag;
+  private swag: Swag;
 
-  public window: Window;
-
-  public eventEmitter: EventEmitter<Event>;
+  private eventEmitter: EventEmitter<Event>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,17 +60,12 @@ export class FileUploadComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    console.log('on submit in fu entered');
     this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
-    this.formData.append('file', this.uploadForm.get('swaggerFile').value);
+    this.formData.append('file', this.selectedFile);
     this.formData.append('LoadTestConfig', this.loadTestConfig);
-    console.log('Posting Swagger File');
     const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
-    console.log('Received Swagger Response:', swaggerResponse);
     this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
-    console.log('Estimated ETA:', this.secondsUntilETA * 1000);
     await this.timeout();
-    console.log('Timeout Complete');
     sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
     await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
     this.router.navigateByUrl('/results-summary');
@@ -101,7 +92,6 @@ export class FileUploadComponent implements OnInit {
       } catch (e) {
         this.errorMsg = 'Error: Failed while trying to parse.';
         this.displayErrorMsg();
-        console.log(e);
       }
     };
   }
@@ -119,7 +109,6 @@ export class FileUploadComponent implements OnInit {
       } catch (e) {
         this.errorMsg = 'Error: Failed while trying to parse.';
         this.displayErrorMsg();
-        console.log(e);
       }
     };
   }

@@ -1,9 +1,9 @@
 export class SwaggerUploadResponse {
-  eta: number;
+  public eta: number;
 
-  resultRef: string;
+  public resultRef: string;
 
-  swaggerSummaryId: number;
+  public swaggerSummaryId: number;
 
   constructor();
   constructor(eta: number, result_ref: string, swaggerSummaryId: number);
