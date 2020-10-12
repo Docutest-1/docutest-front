@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { NgxsOnInit } from '@ngxs/store';
 import { LoadTestConfig } from 'src/app/models/loadTestConfig';
 @Component({
   selector: 'app-start-load-test-widget',
@@ -83,6 +82,7 @@ export class StartLoadTestWidgetComponent {
     } else {
       this.submit();
       this.myEvent.emit(true);
+      console.log('event emitted');
     }
   }
 

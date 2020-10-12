@@ -30,25 +30,15 @@ export class FileUploadComponent implements OnInit {
 
   private loadTestConfig: string;
 
-  private formData: FormData = new FormData();
-
   private secondsUntilETA: number;
 
-  public swaggerSummary: SwaggerSummary;
-
   public swaggerUploadResponse: SwaggerUploadResponse;
-
-  public loadTestConfig: string;
 
   public formData: FormData = new FormData();
 
   public sessionStorage: Storage;
 
-  public secondsUntilETA: number;
-
   public swaggerSummary: SwaggerSummary;
-
-  public swaggerUploadResponse: SwaggerUploadResponse;
 
   /** Used to reset the file input */
   @ViewChild('fileIn')
@@ -57,8 +47,6 @@ export class FileUploadComponent implements OnInit {
   private swag: Swag;
 
   private eventEmitter: EventEmitter<Event>;
-
-  public eventEmitter: EventEmitter<Event>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -198,25 +186,5 @@ export class FileUploadComponent implements OnInit {
         this.displayErrorMsg();
       }
     }
-  }
-
-  async onSubmit(): Promise<void> {
-    this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
-    this.formData.append('file', this.uploadForm.get('swaggerFile').value);
-    this.formData.append('LoadTestConfig', this.loadTestConfig);
-    console.log('Posting Swagger File');
-    const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
-    console.log('Received Swagger Response:', swaggerResponse);
-    this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
-    console.log('Estimated ETA:', this.secondsUntilETA * 1000);
-    await this.timeout();
-    console.log('Timeout Complete');
-    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
-    await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
-    this.router.navigateByUrl('/results-summary');
-  }
-
-  timeout(): Promise<any> {
-    return new Promise((resolve) => setTimeout(resolve, this.secondsUntilETA));
   }
 }

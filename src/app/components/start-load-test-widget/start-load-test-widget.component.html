@@ -28,9 +28,9 @@
         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Duration or Loops
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button class="dropdown-item" (click)="toggleLoopsOrDuration()">Duration</button>
-          <button class="dropdown-item" (click)="toggleLoopsOrDuration()">Number Of Loops</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "Loops or Duration">
+          <button class="dropdown-item" (click)="toggleLoopsOrDuration()" id = "Duration">Duration</button>
+          <button class="dropdown-item" (click)="toggleLoopsOrDuration()" id = "Number of Loops">Number Of Loops</button>
         </div>
       </div>
       <div *ngIf="!showDuration">
@@ -101,6 +101,7 @@
   </div>
 
   <div *ngIf="running">
+    <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
       <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
       <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
     <table>
