@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+$navbar-height: 74px;
+
+$light-green: #0ce977;
+$light-green-desaturated: #80FFBC;
+$light-pink: #FD23C0;
+$light-pink-desaturated: #FF81DC;
+
 a {
     color: white;
 }
@@ -10,3 +18,13 @@ a:hover {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// This is for the router outlet
+// When a router outlet is used, it appends the component as a sibling.
+// Therefore in order to give the sibling (or host as I refer to it) a class, we must do it in the 
+// child components 'host metadata' or 'hostbinding' (See: css-dashboard-component.ts)
+// This styling affects the host whenever css dashboard is a child of it. 
+.host-container {
+    display: flex;
+    flex: 1;
+}

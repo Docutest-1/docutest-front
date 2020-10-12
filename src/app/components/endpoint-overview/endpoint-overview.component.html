@@ -1,0 +1,17 @@
+<div class="endpoint-overview">
+    <!-- One Row -->
+    <div class="title-row">
+        <p class="title">Application Endpoint Overview</p>
+        <p class="subtitle">Small Explanation Here</p>
+    </div>
+    <!-- Second Row -->
+    
+    <ng-container class="data-row" *ngFor="let stat of endpointStats">
+        <div class="border-right">
+            <h2 class="stat-title">{{stat.name}}</h2>
+            <h1>{{stat.value}}</h1>
+        </div>
+    </ng-container>
+    
+
+</div>

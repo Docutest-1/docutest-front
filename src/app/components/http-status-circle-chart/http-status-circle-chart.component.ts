@@ -1,19 +1,24 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit, Component, ElementRef, ViewChild
+} from '@angular/core';
 
 import * as d3 from 'd3';
+import { TreeMapService } from 'src/app/services/tree-map.service';
 @Component({
   selector: 'app-http-status-circle-chart',
   templateUrl: './http-status-circle-chart.component.html',
   styleUrls: ['./http-status-circle-chart.component.scss']
 })
-export class HttpStatusCircleChartComponent implements OnInit {
+export class HttpStatusCircleChartComponent implements AfterViewInit {
+  @ViewChild('svg') svgPieWrapper: ElementRef;
+
   /*
     Potential inputs from parent
   */
-  @Input() pieChartData;
+  pieChartData:any[];
 
-  @Input() pieChartName;
+  pieChartName;
 
   private chartName = '200 Status Code';
 
@@ -59,6 +64,9 @@ export class HttpStatusCircleChartComponent implements OnInit {
     .value((d: any) => Number(d.value))
     .sort(null);
 
+  constructor(private treeMapService: TreeMapService) {
+
+  }
   // constructor() {
   // this.dummy_data = [
   //   {
@@ -73,16 +81,39 @@ export class HttpStatusCircleChartComponent implements OnInit {
 
   // }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.pieChartName = 'HTTP Status Codes';
+    this.svg = d3
+      .select(this.svgPieWrapper.nativeElement)
+      .attr('width', this.width)
+      .attr('height', this.height);
+    this.treeMapService.currentDashData.subscribe((data) => {
+      this.pieChartData = [];
+      if (data) {
+        const currData = data[0];
+
+        this.pieChartData.push({
+          colorIndex: 1,
+          value: Number.parseFloat(currData.successFailPercentage.toFixed(2)),
+          label: '200 status codes'
+        });
+
+        this.pieChartData.push({
+          colorIndex: 2,
+          value: 100 - 90,
+          label: '400/500 status codes'
+        });
+      }
+
+      this.svg.selectAll('*').remove();
+      this.createSvg();
+      this.drawChart();
+    });
     this.createSvg();
     this.drawChart();
   }
 
   private createSvg(): void {
-    this.svg = d3
-      .select('svg')
-      .attr('width', this.width)
-      .attr('height', this.height);
     this.g = this.svg
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
@@ -100,46 +131,40 @@ export class HttpStatusCircleChartComponent implements OnInit {
 
     this.path = this.g
       .selectAll('path')
-      .data(this.pie(this.dummy_data))
-      .join(
-        (enter) => enter
-          .append('path')
-          .style('fill', (d) => this.colors(d.data.colorIndex))
-          .attr('d', arc)
-          .each(function storeCurr(d) { this._current = d; })
-      );
+      .data(this.pie(this.pieChartData))
+      .enter()
+      .append('path')
+      .style('fill', (d) => this.colors(d.data.colorIndex))
+      .attr('d', arc)
+      .each(function storeCurr(d) { this._current = d; });
 
     /*
         Filters to only allow paths with extra data
         to be interacted with
     */
     const dataPath = this.path
-      .filter((d, i) => d.data.childData !== null);
+      .filter((d) => d.data.childData !== null);
 
     dataPath.style('cursor', 'pointer');
 
     this.g
       .append('text')
       .attr('text-anchor', 'middle')
-      .style('font-size', '50pt')
-      .text(this.realPercentage);
+      .style('font-size', '10pt')
+      .text(this.pieChartName);
 
-    const arcOver = d3.arc()
-      .outerRadius(this.radius * 1.05)
-      .innerRadius(this.radius - 10);
-
-    dataPath.on('mouseover', function expandSlice() {
-      d3.select(this)
-        .transition()
-        .ease(d3.easeSin)
-        .duration(100)
-        .attr('d', arcOver);
-    }).on('mouseout', function returnExpandedSlice() {
-      d3.select(this)
-        .transition()
-        .ease(d3.easeBounce)
-        .duration(500)
-        .attr('d', arc);
-    });
+    // dataPath.on('mouseover', function expandSlice() {
+    //   d3.select(this)
+    //     .transition()
+    //     .ease(d3.easeSin)
+    //     .duration(100)
+    //     .attr('d', arcOver);
+    // }).on('mouseout', function returnExpandedSlice() {
+    //   d3.select(this)
+    //     .transition()
+    //     .ease(d3.easeBounce)
+    //     .duration(500)
+    //     .attr('d', arc);
+    // });
   }
 }

@@ -1,0 +1,40 @@
+.border-right {
+    border-right: 1px #e2e2e2;
+    padding-left: 5px;
+    white-space: pre;
+}
+
+.endpoint-overview {
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: grid;
+    grid-template-rows: 40% 60%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    // padding-bottom: 10%;
+    
+}
+
+.title-row {
+    padding-left: 1%;
+    grid-row: 1;
+    grid-column: 1/5;
+}
+.stat-title {
+    line-height: 1.2;
+}
+.title {
+    font-size: 1.3em;
+    // font-weight: bold;
+    line-height: 1;
+}
+.subtitle {
+    line-height: 0;
+    font-size: 0.7em;
+}
+
+.data-row {
+    grid-row: 2;
+}
+
