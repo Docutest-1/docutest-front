@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  Component, ElementRef, OnInit, ViewChild, ViewEncapsulation
+  Component, ElementRef, ViewChild, ViewEncapsulation
 } from '@angular/core';
 import * as d3 from 'd3';
 import { BoxChartData } from 'src/app/models/box-chart-data';
@@ -128,8 +128,6 @@ export class BoxChartComponent implements AfterViewInit {
     const xAxisGenerator = d3.axisBottom(xScale).tickArguments([5]).tickSize(16);
 
     this.g.append('g').call(xAxisGenerator).style('transform', `translate(0, ${this.boxCenter + this.boxHeight}px)`).style('font-size', '14px');
-
-    console.log(this.boxChartData);
 
     this.g.append('line')
       .attr('y1', this.boxCenter)

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ResultSummary } from '../models/result-summary';
 import { SwaggerSummary } from '../models/swagger-summary';
 
@@ -12,12 +13,14 @@ export class TreeMapService {
 
   private currentDashDataSource = new BehaviorSubject(null);
 
+  private uri = `${environment.API_BASE_URL}:${environment.PORT}`;
+
   treeMapData: Observable<SwaggerSummary> = this.treeMapDataSource.asObservable();
 
   currentDashData: Observable<ResultSummary[]> = this.currentDashDataSource.asObservable();
 
-  async updateData() {
-    const responseData = await this.http.get<SwaggerSummary>('http://localhost:8083/Docutest/swaggersummary/22').toPromise();
+  async updateData(id: number) {
+    const responseData = await this.http.get<SwaggerSummary>(`${this.uri}/Docutest/swaggersummary/${id}`).toPromise();
     this.treeMapDataSource.next(responseData);
   }
 

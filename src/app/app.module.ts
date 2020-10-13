@@ -23,8 +23,6 @@ import { DemoTableComponent } from './components/demo-table/demo-table.component
 import { ResultsSummaryComponent } from './pages/results-summary/results-summary.component';
 import { UploadComponent } from './pages/upload/upload.component';
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
-import { GenericD3Component } from './components/generic-d3/generic-d3.component';
-import { HttpStatusDonutChartComponent } from './components/http-status-donut-chart/http-status-donut-chart.component';
 import { HttpStatusCircleChartComponent } from './components/http-status-circle-chart/http-status-circle-chart.component';
 import { TreeMapComponent } from './components/tree-map/tree-map.component';
 import { CssDashboardComponent } from './components/css-dashboard/css-dashboard.component';
@@ -42,8 +40,6 @@ import { EndpointOverviewComponent } from './components/endpoint-overview/endpoi
     DemoTableComponent,
     ResultsSummaryComponent,
     UploadComponent,
-    GenericD3Component,
-    HttpStatusDonutChartComponent,
     HttpStatusCircleChartComponent,
     TreeMapComponent,
     CssDashboardComponent,

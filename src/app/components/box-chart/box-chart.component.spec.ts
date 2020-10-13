@@ -1,22 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TreeMapService } from 'src/app/services/tree-map.service';
 
 import { BoxChartComponent } from './box-chart.component';
 
 describe('BoxChartComponent', () => {
   let component: BoxChartComponent;
   let fixture: ComponentFixture<BoxChartComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ BoxChartComponent ]
-    })
-    .compileComponents();
-  });
+  let service: TreeMapService;
+  class MockTreeMapService {}
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoxChartComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [BoxChartComponent, { provide: TreeMapService, useClass: MockTreeMapService }]
+    });
+    component = TestBed.inject(BoxChartComponent);
+    service = TestBed.inject(TreeMapService);
   });
 
   it('should create', () => {

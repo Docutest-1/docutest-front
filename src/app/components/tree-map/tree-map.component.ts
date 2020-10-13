@@ -219,6 +219,7 @@ export class TreeMapComponent implements OnDestroy, OnInit {
 
     this.treemap(this.root);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const rects = this.g
       .selectAll('rect')
       .data(this.root.descendants())
@@ -244,7 +245,7 @@ export class TreeMapComponent implements OnDestroy, OnInit {
       .attr('class', 'interactable')
       .on('click', (_, i) => {
         this.updateDataChange(i);
-      });
+    });
     /*
       Here is a fantastic example of how the selector ACTUALLY is used.
       There does not exist any titles elements, so we create them by calling
@@ -254,7 +255,7 @@ export class TreeMapComponent implements OnDestroy, OnInit {
       example of how to filter out items by data and then using the given coordinates
       to map to spots.
     */
-    const labels = this.g
+    this.g
       .selectAll('titles')
       .data(this.root.descendants())
       .enter()
@@ -265,14 +266,22 @@ export class TreeMapComponent implements OnDestroy, OnInit {
       .attr('y', (d) => d.y0 + outerPadding + 25)
       // .append('tspan')
       .text(function calc(d) {
-        if (d.data.uri) {
-        console.log(d.data.uri.split('.').slice(-1)[0]);
-        console.log(d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9+]+'));
-}
-        return d.data.name ? d.data.name : d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9]+');
+        /*
+          Google.com/random/random2
+
+          splits on dot: com/random/random2
+
+          match regex: /random/random2
+        */
+        if (d.data.name) {
+          return d.data.name;
+        }
+        if (d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9]+')) {
+          return d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9]+');
+        }
+          return d.data.uri;
       })
       .style('font-size', function calcFontSize(d) {
-        console.log(this.getComputedTextLength());
         if (Math.min(d.x1 - d.x0, this.getComputedTextLength()) !== this.getComputedTextLength()) {
           return '8pt';
       }

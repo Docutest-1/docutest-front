@@ -11,6 +11,8 @@ import { LoadTestConfig } from 'src/app/models/loadTestConfig';
 export class StartLoadTestWidgetComponent {
   public time = 0;
 
+  public showDuration = true;
+
   public interval: any;
 
   public running = false;
@@ -31,22 +33,24 @@ export class StartLoadTestWidgetComponent {
 
   public msgShowSuccess = false;
 
+  public tester = 'Default';
+
   @Output() myEvent: EventEmitter<boolean> = new EventEmitter();
 
   public advanceForm = new FormGroup({
-    planName: new FormControl(''),
-    loops: new FormControl(''),
-    duration: new FormControl(''),
-    thread: new FormControl(''),
-    rampUp: new FormControl(''),
-    followRedirect: new FormControl(''),
+    planName: new FormControl('Default'),
+    loops: new FormControl(5),
+    duration: new FormControl(10),
+    thread: new FormControl(10),
+    rampUp: new FormControl(10),
+    followRedirect: new FormControl(true),
   });
 
   startTest(): void {
-    if (this.advance === true) {
+    if (this.showDuration === true) {
       this.LTC = new LoadTestConfig(
         this.advanceForm.get('planName').value,
-        this.advanceForm.get('loops').value,
+        -1,
         this.advanceForm.get('duration').value,
         this.advanceForm.get('thread').value,
         this.advanceForm.get('rampUp').value,
@@ -54,9 +58,20 @@ export class StartLoadTestWidgetComponent {
       );
       sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     } else {
-      this.LTC = new LoadTestConfig('Default', -1, 10, 10, 10, false);
+      this.LTC = new LoadTestConfig(
+        this.advanceForm.get('planName').value,
+        this.advanceForm.get('loops').value,
+        0,
+        this.advanceForm.get('thread').value,
+        this.advanceForm.get('rampUp').value,
+        this.advanceForm.get('followRedirect').value,
+      );
       sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     }
+    // } else {
+    //   this.LTC = new LoadTestConfig('Default', -1, 10, 10, 10, true);
+    //   sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
+    // }
     if (
       this.LTC.loops == null
       || this.LTC.duration == null
@@ -127,5 +142,9 @@ export class StartLoadTestWidgetComponent {
     this.time = 0;
     this.stop();
     location.reload();
+  }
+
+  toggleLoopsOrDuration() {
+    this.showDuration = !this.showDuration;
   }
 }

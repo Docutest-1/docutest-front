@@ -1,79 +1,88 @@
 <!-- Table for Success and Failures start-->
-<table class="table" style="width: 50%;">
-    <!--Accessible to visually impaired users-->
-    <caption hidden>
-      Test Plan
-    </caption>
-    <thead class="thead-dark">
-      <tr>
-        <!--Table columns start -->
-        <th scope="col"></th>
-        <th scope="col">Test Plan Id:</th>
-        <th scope="col">Test Plan Name:</th>
-        <th scope="col">Loops</th>
-        <th scope="col">Duration</th>
-        <th scope="col">Threads</th>
-        <th scope="col">Ramp Up</th>
-        <th scope="col">Follow Redirects</th>
-      </tr>
-      <!--Table columns end -->
-    </thead>
-    <tbody>
-      <tr *ngIf="swaggerSummary">
-        <th scope="row"></th>
-        <td>{{swaggerSummary.id }}</td>
-        <td>{{swaggerSummary.testPlanName}}</td>
-        <td>{{swaggerSummary.loops}}</td>
-        <td>{{swaggerSummary.duration}}</td>
-        <td>{{swaggerSummary.threads}}</td>
-        <td>{{swaggerSummary.rampUp}}</td>
-        <td>{{swaggerSummary.followRedirects}}</td>
-        
- 
-      </tr>
-    </tbody>
-  </table> 
+<div class="tables-container">
+  <br/>
+  <h2 style = "text-align: center">Test Configurations</h2>
+  <table class="table border border-dark" style="width: 50%;">
+      <!--Accessible to visually impaired users-->
+      <caption hidden>
+        Test Plan
+      </caption>
+      <thead class="thead-dark">
+        <tr>
+          <!--Table columns start -->
+          <th scope="col"></th>
+          <th scope="col">Test Plan Id:</th>
+          <th scope="col">Test Plan Name:</th>
+          <th scope="col">Loops</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Threads</th>
+          <th scope="col">Ramp Up</th>
+          <th scope="col">Follow Redirects</th>
+        </tr>
+        <!--Table columns end -->
+      </thead>
+      <tbody>
+        <tr *ngIf="swaggerSummary">
+          <th scope="row"></th>
+          <td>{{swaggerSummary.id }}</td>
+          <td>{{swaggerSummary.testPlanName}}</td>
+          <td>{{swaggerSummary.loops}}</td>
+          <td>{{swaggerSummary.duration}}</td>
+          <td>{{swaggerSummary.threads}}</td>
+          <td>{{swaggerSummary.rampUp}}</td>
+          <td>{{swaggerSummary.followRedirects}}</td>
+          
   
-
-<!-- Table for Success and Failures start-->
-<table class="table" style="width: 75%;">
-    <!--Accessible to visually impaired users-->
-    <caption hidden>
-      Result Summaries
-    </caption>
-    <thead class="thead-dark">
-      <tr>
-        <!--Table columns start -->
-        <th scope="col"></th>
-        <th scope="col">Result Summary Id:</th>
-        <th scope="col">URI</th>
-        <th scope="col">HTTP Method</th>
-        <th scope="col">Response Average</th>
-        <th scope="col">Response 25th Percentile</th>
-        <th scope="col">Response 50th Percentile</th>
-        <th scope="col">Response 75th Percentile</th>
-        <th scope="col">Response Max</th>
-        <th scope="col">Fail Count</th>
-        <th scope="col">Succeess/Fail Percentage</th>
-        <th scope="col">Requests Per Second</th>
-
-      </tr>
-      <!--Table columns end -->
-    </thead>
-    <tbody *ngIf="swaggerSummaryId">
-      <tr *ngFor="let d of resultSummary">
-        <th scope="row"></th>
-        <td>{{d.id}}</td>
-        <td>{{d.uri}}</td>
-        <td>{{d.httpMethod}}</td>
-        <td>{{d.responseAvg}}</td>
-        <td>{{d.response25Percentile}}</td>
-        <td>{{d.response50Percentile}}</td>
-        <td>{{d.response75Percentile}}</td>
-        <td>{{d.responseMax}}</td>
-        <td>{{d.failCount}}</td>
-        <td>{{d.successFailPercentage}}</td>
-        <td>{{d.reqPerSec}}</td>
-      </tr>
-    </tbody>
-  </table> 
+        </tr>
+      </tbody>
+    </table> 
+    <br/>
+    <h2 style = "text-align: center">Result Summary</h2>
+  <!-- Table for Success and Failures start-->
+  <table class="table border border-dark" style="width: 75%;">
+      <!--Accessible to visually impaired users-->
+      <caption hidden>
+        Result Summaries
+      </caption>
+      <thead class="thead-dark">
+        <tr>
+          <!--Table columns start -->
+          <th scope="col"></th>
+          <th scope="col">Result Summary Id:</th>
+          <th scope="col">URI</th>
+          <th scope="col">HTTP Method</th>
+          <th scope="col">Response Average</th>
+          <th scope="col">Response 25th Percentile</th>
+          <th scope="col">Response 50th Percentile</th>
+          <th scope="col">Response 75th Percentile</th>
+          <th scope="col">Response Max</th>
+          <th scope="col">Fail Count</th>
+          <th scope="col">Succeess/Fail Percentage</th>
+          <th scope="col">Requests Per Second</th>
+          <th scope="col">Download CSV</th>
+        </tr>
+        <!--Table columns end -->
+      </thead>
+      <tbody *ngIf="swaggerSummaryId">
+        <tr *ngFor="let d of resultSummary">
+          <th scope="row"></th>
+          <td>{{d.id}}</td>
+          <td>{{d.uri}}</td>
+          <td>{{d.httpMethod}}</td>
+          <td>{{d.responseAvg}}</td>
+          <td>{{d.response25Percentile}}</td>
+          <td>{{d.response50Percentile}}</td>
+          <td>{{d.response75Percentile}}</td>
+          <td>{{d.responseMax}}</td>
+          <td>{{d.failCount}}</td>
+          <td>{{d.successFailPercentage % 1 !== 0 ? d.successFailPercentage.toFixed(2) : d.successFailPercentage}}</td>
+          <td>{{d.reqPerSec % 1 !== 0 ? d.reqPerSec.toFixed(2) : d.reqPerSec}}</td>
+          <td>
+            <a class="btn btn-sm btn-success" [href]="d.dataReference">
+              Link
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+</div>
