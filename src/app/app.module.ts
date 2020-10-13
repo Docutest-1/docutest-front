@@ -23,6 +23,7 @@ import { HttpTableComponent } from './components/http-table/http-table.component
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { HomeComponent } from './pages/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HomeComponent } from './pages/home/home.component';
     HttpTableComponent,
     StartLoadTestWidgetComponent,
     HomeComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
