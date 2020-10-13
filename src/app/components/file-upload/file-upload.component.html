@@ -1,18 +1,21 @@
-<div class="container">
-    <div class="child">
+<br><br><br>
+<div class="row text-center justify-content-center align-content-center">
+    <div id="upload" class="col col-4 rounded">
         <form [formGroup]="uploadForm">
             <div>
-                <input #fileIn class="file-input" type="file" accept=".yml, .yaml,.json" name="swaggerFile"
+                <input #fileIn class="file-input text-light mt-4" type="file" accept=".yml, .yaml,.json" name="swaggerFile"
                     (change)="onFileSelect($event)" />
             </div>
             <div>
-                <button class="btn btn-primary" type="submit">Upload</button>
+                <button class="btn btn-lg text-light mt-3 mb-4" type="submit">Upload</button>
             </div>
         </form>
     </div>
 </div>
-<div class="center">
-    <div *ngIf = "show" class="alert alert-danger text-center" role="alert">
-        {{ errorMsg }}
+<div class="row text-center justify-content-center align-content-center">
+    <div class="col col-4">
+        <div *ngIf = "show" class="alert alert-danger text-center mt-3" role="alert">
+            {{ errorMsg }}
+        </div>
     </div>
 </div>
