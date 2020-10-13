@@ -50,6 +50,7 @@ import { FooterComponent } from './components/footer/footer.component';
     EndpointOverviewComponent,
     HomeComponent,
     FooterComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
