@@ -3,7 +3,7 @@
     padding-top: 2%;
     padding-left: 2%;
     padding-right: 2%;
-    padding-bottom: 2%;
+    //padding-bottom: 2%;
     display: grid;
     justify-items: center;
     width: 100%;
@@ -12,7 +12,6 @@
     // background-color: blue;
     // flex-direction: column;
     // min-height: calc(100% - $navbar-height);
-    background-color: #e2e2e2;
     column-gap: 1%;
     overflow: hidden;
 }

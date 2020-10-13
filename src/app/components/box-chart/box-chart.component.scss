@@ -1,5 +1,3 @@
-@import "../../../variables.scss";
-
 #boxChart {
     width: 100%;
     height: 100%;
@@ -10,17 +8,17 @@
     // margin-bottom: 5px;
     // display: block;
     // margin: auto;
-    color: black;
+    color: #474C55;
 }
 text {
-    fill: black;
+    fill: #474C55;
 }
 .tick line {
-    stroke: black;
+    stroke: #474C55;
 }
 
 .box-chart-rectangle {
-    fill: $light-green;
+    fill: #72A4C2;
 }
 
 .box-chart-title {

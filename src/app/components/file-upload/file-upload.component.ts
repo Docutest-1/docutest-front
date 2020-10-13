@@ -24,7 +24,7 @@ export class FileUploadComponent implements OnInit {
 
   public show = false;
 
-  private fileExt: string;
+  public fileExt: string;
 
   private regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
 

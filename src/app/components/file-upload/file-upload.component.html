@@ -1,26 +1,21 @@
-<div class="container">
-  <div class="child">
-    <form [formGroup]="uploadForm">
-      <div>
-        <input
-          #fileIn
-          class="file-input"
-          type="file"
-          accept=".yaml,.json"
-          name="swaggerFile"
-          (change)="onFileSelect($event)"
-        />
-      </div>
-      <div>
-        <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modal2" [disabled]="!selectedFile">
-          Start Test
-        </button>
-      </div>
-    </form>
-  </div>
+<br><br><br>
+<div class="row text-center justify-content-center align-content-center">
+    <div id="upload" class="col col-4 rounded">
+        <form [formGroup]="uploadForm">
+            <div>
+                <input #fileIn class="file-input text-light mt-4" type="file" accept=".yml, .yaml,.json" name="swaggerFile"
+                    (change)="onFileSelect($event)" />
+            </div>
+            <div>
+                <button class="btn btn-lg text-light mt-3 mb-4" type="submit" data-toggle="modal" data-target="#modal2" [disabled]="!selectedFile">Upload</button>
+            </div>
+        </form>
+    </div>
 </div>
-<div class="center">
-  <div *ngIf = "show" class="alert alert-danger text-center" role="alert">
-      {{ errorMsg }}
-  </div>
+<div class="row text-center justify-content-center align-content-center">
+    <div class="col col-4">
+        <div *ngIf = "show" class="alert alert-danger text-center mt-3" role="alert">
+            {{ errorMsg }}
+        </div>
+    </div>
 </div>

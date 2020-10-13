@@ -48,7 +48,6 @@ import { FooterComponent } from './components/footer/footer.component';
     BoxChartComponent,
     HistogramComponent,
     EndpointOverviewComponent,
-    HomeComponent,
     FooterComponent,
     HomeComponent,
   ],

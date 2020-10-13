@@ -4,9 +4,16 @@
       <h2 id="title-button" class="inner-text mt-2 pb-1">Docutest</h2>
     </div>
   </a>
+  
+  <div class="text-right ml-auto" style="margin-right:5px">
+  <input type="number" [(ngModel)]="id" placeholder="Summary ID" />
+  <button class="btn navbarButton rounded" style="background-color:#F26925;" (click)="searchSummary()">Search</button>
+  </div>
+
+  <div class="text-right">
   <div class="dropdown">
     <button
-      class="btn btn-secondary dropdown-toggle"
+      class="btn dropdown-toggle rounded"
       type="button"
       id="dropdownMenuButton"
       data-toggle="dropdown"
@@ -15,14 +22,12 @@
     >
       Actions
     </button>
-    
-    <input type="number" [(ngModel)]="id" placeholder="Summary ID" />
-    <button class="btn btn-primary" (click)="searchSummary()">Search</button>
-    
+
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" routerLink="upload">Upload</a>
       <a class="dropdown-item" routerLink="results-summary">Result Summary Page</a>
       <a class="dropdown-item" routerLink="cssdash">Dashboard</a>
     </div>
   </div>
+</div>
 </nav>
