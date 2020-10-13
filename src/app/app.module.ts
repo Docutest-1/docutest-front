@@ -22,6 +22,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { HttpTableComponent } from './components/http-table/http-table.component';
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
     FileUploadComponent,
     HttpTableComponent,
     StartLoadTestWidgetComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
