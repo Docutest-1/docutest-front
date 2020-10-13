@@ -1,20 +1,8 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-        width: 350px;
-        height: 100px;
-        padding: 20px;
-        border: 5px solid black;
-        border-radius: 8px;
+#upload {
+    background-color: #474C55;
+    box-shadow: 0 8px 10px -5px #474C55;
 }
-.center {
-    margin: auto;
-    width: 25%;
-    border: 3px;
-    padding: 10px;
-  }
-.child{
-    border: 5px;
-    border-color: black;
+
+.btn {
+    background-color: #F26925;
 }
