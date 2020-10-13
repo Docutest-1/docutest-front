@@ -35,6 +35,8 @@ export class StartLoadTestWidgetComponent {
 
   public tester = 'Default';
 
+  public timeToEta: number;
+
   @Output() myEvent: EventEmitter<boolean> = new EventEmitter();
 
   public advanceForm = new FormGroup({
@@ -83,6 +85,20 @@ export class StartLoadTestWidgetComponent {
       this.submit();
       this.myEvent.emit(true);
       console.log('event emitted');
+    }
+    setTimeout(() => {
+      this.checkEta();
+    }, 200);
+  }
+
+  checkEta() {
+    const temp = parseInt(sessionStorage.getItem('timeToEta'), 10);
+    if (!isNaN(temp)) {
+      this.timeToEta = temp / 1000;
+    } else {
+      setTimeout(() => {
+        this.checkEta();
+      }, 200);
     }
   }
 

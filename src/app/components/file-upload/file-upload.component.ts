@@ -66,6 +66,7 @@ export class FileUploadComponent implements OnInit {
     this.formData.append('LoadTestConfig', this.loadTestConfig);
     const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
     this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
+    sessionStorage.setItem('timeToEta', this.secondsUntilETA.toString());
     await this.timeout();
     sessionStorage.clear();
     sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
