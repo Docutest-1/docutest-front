@@ -18,13 +18,13 @@ import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
 export class FileUploadComponent implements OnInit {
   public uploadForm: FormGroup;
 
-  private selectedFile: File;
+  public selectedFile: File;
 
   public errorMsg: String = '';
 
   public show = false;
 
-  private fileExt: string;
+  public fileExt: string;
 
   private regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
 
