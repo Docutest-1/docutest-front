@@ -30,6 +30,7 @@ import { BoxChartComponent } from './components/box-chart/box-chart.component';
 import { HistogramComponent } from './components/histogram/histogram.component';
 import { EndpointOverviewComponent } from './components/endpoint-overview/endpoint-overview.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { HomeComponent } from './pages/home/home.component';
     BoxChartComponent,
     HistogramComponent,
     EndpointOverviewComponent,
+    HomeComponent,
+    FooterComponent,
     HomeComponent,
   ],
   imports: [
