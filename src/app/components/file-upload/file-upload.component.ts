@@ -56,6 +56,8 @@ export class FileUploadComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       swaggerFile: [''],
     });
+
+    this.store.select('dashboardData').subscribe((dashData) => { this.currentDashboardData = dashData; });
   }
 
   async onSubmit(): Promise<void> {
