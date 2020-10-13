@@ -29,6 +29,7 @@ import { CssDashboardComponent } from './components/css-dashboard/css-dashboard.
 import { BoxChartComponent } from './components/box-chart/box-chart.component';
 import { HistogramComponent } from './components/histogram/histogram.component';
 import { EndpointOverviewComponent } from './components/endpoint-overview/endpoint-overview.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { EndpointOverviewComponent } from './components/endpoint-overview/endpoi
     BoxChartComponent,
     HistogramComponent,
     EndpointOverviewComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
