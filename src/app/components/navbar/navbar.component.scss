@@ -8,3 +8,14 @@ nav {
   letter-spacing: 1px;
   border-bottom: dotted #F26925 8px;
 }
+#dropdownMenuButton {
+  background-color: #46A2F5;
+  border: none;
+  border-radius: 0px;
+  color: #FFFF;
+}
+.dropdown-menu{
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: -6.7em;
+}
