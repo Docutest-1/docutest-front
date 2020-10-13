@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoadTestConfig } from 'src/app/models/loadTestConfig';
-
 @Component({
   selector: 'app-start-load-test-widget',
   templateUrl: './start-load-test-widget.component.html',
@@ -18,6 +19,8 @@ export class StartLoadTestWidgetComponent {
 
   public click = false;
 
+  public allowRedirect = true;
+
   public indexValue = 0;
 
   public LTC: LoadTestConfig;
@@ -27,6 +30,8 @@ export class StartLoadTestWidgetComponent {
   public msgShowError = false;
 
   public msgShowSuccess = false;
+
+  @Output() myEvent: EventEmitter<boolean> = new EventEmitter();
 
   public advanceForm = new FormGroup({
     planName: new FormControl(''),
@@ -47,10 +52,11 @@ export class StartLoadTestWidgetComponent {
         this.advanceForm.get('rampUp').value,
         this.advanceForm.get('followRedirect').value,
       );
+      sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     } else {
-      this.LTC = new LoadTestConfig('Default', 0, 10, 10, 10, true);
+      this.LTC = new LoadTestConfig('Default', -1, 10, 10, 10, false);
+      sessionStorage.setItem('loadTestConfig', JSON.stringify(this.LTC));
     }
-
     if (
       this.LTC.loops == null
       || this.LTC.duration == null
@@ -60,6 +66,7 @@ export class StartLoadTestWidgetComponent {
       this.errorMessage('Please use numbers');
     } else {
       this.submit();
+      this.myEvent.emit(true);
     }
   }
 
@@ -75,7 +82,7 @@ export class StartLoadTestWidgetComponent {
   }
 
   stopTimer(): void {
-    this.running = false;
+    this.stop();
     this.time = 0;
     clearInterval(this.interval);
   }
@@ -110,5 +117,15 @@ export class StartLoadTestWidgetComponent {
   stop(): void {
     this.running = false;
     this.click = false;
+  }
+
+  changeRedirect(): void {
+    this.allowRedirect = !this.allowRedirect;
+  }
+
+  cancel(): void {
+    this.time = 0;
+    this.stop();
+    location.reload();
   }
 }

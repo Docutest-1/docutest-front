@@ -119,7 +119,7 @@ describe('start-load-test-widget', () => {
     comp.advance = false;
     comp.startTest();
 
-    expect(comp.LTC).toEqual(new LoadTestConfig('Default', 0, 10, 10, 10, true));
+    expect(comp.LTC).toEqual(new LoadTestConfig('Default', -1, 10, 10, 10, false));
   });
 
   it('#startTest() if advance is set to true it calls #submit()', () => {

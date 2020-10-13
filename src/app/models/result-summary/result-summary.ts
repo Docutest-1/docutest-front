@@ -1,15 +1,15 @@
-export class HttpTableData {
+export class ResultSummary {
   public id: number;
 
   public uri: string;
 
   public httpMethod: string;
 
-  public responseAvg: number;
-
   public response25Percentile: number;
 
   public response50Percentile: number;
+
+  public responseAvg: number;
 
   public response75Percentile: number;
 
@@ -28,36 +28,36 @@ export class HttpTableData {
     id: number,
     uri: string,
     httpMethod: string,
-    responseAvg: number,
     response25Percentile: number,
     response50Percentile: number,
+    responseAvg: number,
     response75Percentile: number,
     responseMax: number,
     failCount: number,
     successFailPercentage: number,
     reqPerSec: number,
-    dataReference: string
+    dataReference: string,
   );
   constructor(
     id?: number,
     uri?: string,
     httpMethod?: string,
-    responseAvg?: number,
     response25Percentile?: number,
     response50Percentile?: number,
+    responseAvg?: number,
     response75Percentile?: number,
     responseMax?: number,
     failCount?: number,
     successFailPercentage?: number,
     reqPerSec?: number,
-    dataReference?: string
+    dataReference?: string,
   ) {
     this.id = id;
     this.uri = uri;
     this.httpMethod = httpMethod;
-    this.responseAvg = responseAvg;
     this.response25Percentile = response25Percentile;
     this.response50Percentile = response50Percentile;
+    this.responseAvg = responseAvg;
     this.response75Percentile = response75Percentile;
     this.responseMax = responseMax;
     this.failCount = failCount;

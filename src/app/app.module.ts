@@ -18,10 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LineChartComponent } from './components/line-chart/line-chart.component';
-import { HttpTableComponent } from './components/http-table/http-table.component';
 import { StartLoadTestWidgetComponent } from './components/start-load-test-widget/start-load-test-widget.component';
 import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
+import { DemoTableComponent } from './components/demo-table/demo-table.component';
+import { ResultsSummaryComponent } from './pages/results-summary/results-summary.component';
+import { UploadComponent } from './pages/upload/upload.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -30,10 +31,11 @@ import { FooterComponent } from './components/footer/footer.component';
     AppComponent,
     NavbarComponent,
     DashboardComponent,
-    LineChartComponent,
     FileUploadComponent,
-    HttpTableComponent,
     StartLoadTestWidgetComponent,
+    DemoTableComponent,
+    ResultsSummaryComponent,
+    UploadComponent,
     HomeComponent,
     FooterComponent,
   ],

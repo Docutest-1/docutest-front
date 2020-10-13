@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable prefer-const */
+/* eslint-disable max-classes-per-file */
 import {
   async, ComponentFixture, TestBed, inject, getTestBed, fakeAsync
 } from '@angular/core/testing';
@@ -58,9 +61,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.json');
+    expect(component['fileExt']).toEqual('.json');
     expect(component.jsonParser).toHaveBeenCalledWith();
     expect(component.yamlParser).not.toHaveBeenCalled();
   });
@@ -71,9 +74,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.yaml');
+    expect(component['fileExt']).toEqual('.yaml');
     expect(component.jsonParser).not.toHaveBeenCalled();
     expect(component.yamlParser).toHaveBeenCalledWith();
   });
@@ -84,9 +87,9 @@ describe('FileUploadComponent', () => {
     spyOn(component, 'yamlParser');
     component.onFileSelect(mockEvt);
 
-    expect(component.selectedFile).toEqual(mockEvt.target.files[0]);
+    expect(component['selectedFile']).toEqual(mockEvt.target.files[0]);
     expect(mockEvt.target.files.length).toBeGreaterThan(0);
-    expect(component.fileExt).toEqual('.yml');
+    expect(component['fileExt']).toEqual('.yml');
     expect(component.jsonParser).not.toHaveBeenCalled();
     expect(component.yamlParser).toHaveBeenCalledWith();
   });
@@ -103,13 +106,13 @@ describe('FileUploadComponent', () => {
   });
 
   it('selectedFile should contain file', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
 
-    expect(component.selectedFile).not.toBeNull();
+    expect(component['selectedFile']).not.toBeNull();
   });
 
   it('should extract file extension from file name and return it as a string', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     const fileExtTest = component.getFileExtension(jsonFile);
 
     expect(fileExtTest).toEqual('.json');
@@ -122,7 +125,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the json file', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     component.jsonParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -130,7 +133,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the json file and if fails displays error message and resets file upload', () => {
-    component.selectedFile = jsonFile;
+    component['selectedFile'] = jsonFile;
     component.jsonParser();
     spyOn(component, 'jsonParser');
 
@@ -138,7 +141,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the yaml file', () => {
-    component.selectedFile = yamlFile;
+    component['selectedFile'] = yamlFile;
     component.yamlParser();
     spyOn(component, 'swaggerVersionValidator');
 
@@ -146,7 +149,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should validate the yaml file and if fails displays error message and resets file upload', () => {
-    component.selectedFile = yamlFile;
+    component['selectedFile'] = yamlFile;
     component.yamlParser();
     spyOn(component, 'yamlParser');
 

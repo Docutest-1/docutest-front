@@ -1,14 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 import {
-  Component, OnInit, ViewChild, ElementRef
+  Component, OnInit, ViewChild, ElementRef, EventEmitter
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import yaml from 'js-yaml';
 import { Router } from '@angular/router';
+import { SwaggerService } from 'src/app/services/swagger.service';
 import { Swag } from '../../models/swag';
-
+import { SwaggerUploadResponse } from '../../models/swagger-upload-response/swagger-upload-response';
+import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -25,21 +26,53 @@ export class FileUploadComponent implements OnInit {
 
   public fileExt: string;
 
-  public regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+  private regex = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+
+  private loadTestConfig: string;
+
+  private formData: FormData = new FormData();
+
+  private secondsUntilETA: number;
+
+  public swaggerSummary: SwaggerSummary;
+
+  public swaggerUploadResponse: SwaggerUploadResponse;
 
   /** Used to reset the file input */
   @ViewChild('fileIn')
   fileInput: ElementRef;
 
-  public swag: Swag;
+  private swag: Swag;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, public router: Router) {
-  }
+  private eventEmitter: EventEmitter<Event>;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private swaggerService: SwaggerService,
+  ) {}
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
       swaggerFile: [''],
     });
+    sessionStorage.clear();
+  }
+
+  async onSubmit(): Promise<void> {
+    this.loadTestConfig = sessionStorage.getItem('loadTestConfig');
+    this.formData.append('file', this.selectedFile);
+    this.formData.append('LoadTestConfig', this.loadTestConfig);
+    const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
+    this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
+    await this.timeout();
+    sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
+    await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
+    this.router.navigateByUrl('/results-summary');
+  }
+
+  async timeout(): Promise<any> {
+    return new Promise((resolve) => setTimeout(resolve, this.secondsUntilETA));
   }
 
   getFileExtension(file: File): string {
@@ -59,7 +92,6 @@ export class FileUploadComponent implements OnInit {
       } catch (e) {
         this.errorMsg = 'Error: Failed while trying to parse.';
         this.displayErrorMsg();
-        console.log(e);
       }
     };
   }
@@ -77,7 +109,6 @@ export class FileUploadComponent implements OnInit {
       } catch (e) {
         this.errorMsg = 'Error: Failed while trying to parse.';
         this.displayErrorMsg();
-        console.log(e);
       }
     };
   }

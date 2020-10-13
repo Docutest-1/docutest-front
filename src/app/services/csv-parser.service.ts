@@ -9,7 +9,7 @@ import { ADD_DATA } from '../state/graph-data/graph-data.actions';
   providedIn: 'root',
 })
 export class CsvParserService {
-  editedResults = [];
+  public editedResults = [];
 
   constructor(private papa: Papa, private store: Store) {}
 

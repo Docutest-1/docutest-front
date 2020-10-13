@@ -1,15 +1,15 @@
 export class LoadTestConfig {
-  testPlanName: string;
+  public testPlanName: string;
 
-  loops: number;
+  public loops: number;
 
-  duration: number;
+  public duration: number;
 
-  threads: number;
+  public threads: number;
 
-  rampUp: number;
+  public rampUp: number;
 
-  followRedirects: boolean;
+  public followRedirects: boolean;
 
   public constructor(
     testPlanName: string,

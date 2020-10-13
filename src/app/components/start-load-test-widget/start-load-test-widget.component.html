@@ -6,7 +6,7 @@
       type="button"
       (click)="startTest(); click = true"
     >
-      Start Load Test
+      Start Test
     </button>
     <button
       class="btn btn-primary btn-sm"
@@ -16,20 +16,14 @@
       [disabled]="click"
     >
       Advance Options
-    </button>
-    <button class="btn btn-primary" (click)="stop()">Cancel</button>
+  </button>
+  <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
     <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
     <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
   </div>
   <div class="child" *ngIf="advance">
     <form [formGroup]="advanceForm">
-      <ul>
-        <li>Definition of the custom settings here</li>
-        <li>Custom name to save test plans?</li>
-        <li>Example Text here!!</li>
-      </ul>
-
-      <mat-form-field>
+     <mat-form-field>
         <mat-label>Test plan name </mat-label>
         <input matInput type="text" id="planName" value="" formControlName="planName" /><br />
       </mat-form-field>
@@ -71,7 +65,7 @@
         /><br />
       </mat-form-field>
       <section class="example-section">
-        <mat-checkbox class="example-margin" formControlName="followRedirect"
+        <mat-checkbox class="example-margin" value="allowRedirect" (click)="changeRedirect()" formControlName="followRedirect"
           >Allow Follow Redirects</mat-checkbox
         >
       </section>
@@ -101,6 +95,10 @@
       <tr>
         Ramp up Period
         <strong>{{ LTC.rampUp }} Seconds</strong>
+      </tr>
+      <tr>
+        Allow Redirects :
+        <strong>{{ LTC.followRedirects }}</strong>
       </tr>
     </table>
   </div>
