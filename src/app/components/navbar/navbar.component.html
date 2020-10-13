@@ -1,7 +1,24 @@
-<nav class="navbar bg-dark bg-light custom">
-  <a class="navbar-brand" href="/landing">
+<nav class="navbar custom">
+  <a class="navbar-brand" href="/home">
     <div class="box">
-      <h2 id="title-button" class="inner-text">Docutest</h2>
+      <h2 id="title-button" class="inner-text mt-2 pb-1">Docutest</h2>
     </div>
   </a>
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Actions
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item">Result Summary Page</a>
+      <a class="dropdown-item" href="/dashboard">Dashboard</a>
+    </div>
+  </div>
 </nav>
