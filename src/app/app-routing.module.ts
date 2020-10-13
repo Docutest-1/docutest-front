@@ -10,8 +10,9 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'results-summary', component: ResultsSummaryComponent },
-  { path: '**', redirectTo: 'upload', pathMatch: 'full' },
-  { path: 'cssdash', component: CssDashboardComponent }
+  { path: 'cssdash', component: CssDashboardComponent },
+  { path: '**', redirectTo: 'upload', pathMatch: 'full' }
+
 ];
 
 @NgModule({

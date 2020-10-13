@@ -266,9 +266,16 @@ export class TreeMapComponent implements OnDestroy, OnInit {
       // .append('tspan')
       .text(function calc(d) {
         if (d.data.uri) {
-        console.log(d.data.uri.split('.').slice(-1)[0]);
-        console.log(d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9+]+'));
+          console.log(d.data.uri.split('.').slice(-1)[0]);
+          console.log(d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9+]+'));
 }
+        /*
+          Google.com/random/random2
+
+          splits on dot: com/random/random2
+
+          match regex: /random/random2
+         */
         return d.data.name ? d.data.name : d.data.uri.split('.').slice(-1)[0].match('/[A-Za-z/0-9]+');
       })
       .style('font-size', function calcFontSize(d) {

@@ -6,6 +6,7 @@
 import {
   Component, OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { TreeMapService } from 'src/app/services/tree-map.service';
 
 @Component({
@@ -15,9 +16,14 @@ import { TreeMapService } from 'src/app/services/tree-map.service';
   host: { class: 'host-container' }
 })
 export class CssDashboardComponent implements OnInit {
-  constructor(private treeMapService: TreeMapService) { }
+  constructor(private treeMapService: TreeMapService, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.treeMapService.updateData();
+    if (sessionStorage.getItem('swaggerSummaryId')) {
+      this.treeMapService.updateData(Number(sessionStorage.getItem('swaggerSummaryId')));
+    } else {
+      this.router.navigateByUrl('/upload');
+    }
   }
 }

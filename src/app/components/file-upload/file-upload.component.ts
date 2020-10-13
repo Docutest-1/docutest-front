@@ -18,7 +18,7 @@ import { SwaggerSummary } from '../../models/swagger-summary/swagger-summary';
 export class FileUploadComponent implements OnInit {
   public uploadForm: FormGroup;
 
-  private selectedFile: File;
+  public selectedFile: File;
 
   public errorMsg: String = '';
 
@@ -56,7 +56,6 @@ export class FileUploadComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       swaggerFile: [''],
     });
-    sessionStorage.clear();
   }
 
   async onSubmit(): Promise<void> {
@@ -66,6 +65,7 @@ export class FileUploadComponent implements OnInit {
     const swaggerResponse = await this.swaggerService.uploadSwaggerFile(this.formData);
     this.secondsUntilETA = swaggerResponse.eta - new Date().getTime();
     await this.timeout();
+    sessionStorage.clear();
     sessionStorage.setItem('swaggerSummaryId', String(swaggerResponse.swaggerSummaryId));
     await this.swaggerService.retrieveSwaggerSummary(swaggerResponse);
     this.router.navigateByUrl('/results-summary');
@@ -126,6 +126,8 @@ export class FileUploadComponent implements OnInit {
       } else if (this.fileExt === '.yaml' || this.fileExt === '.yml') {
         this.yamlParser();
       }
+    } else {
+      this.selectedFile = null;
     }
   }
 
@@ -133,6 +135,7 @@ export class FileUploadComponent implements OnInit {
     this.show = true;
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
+      this.selectedFile = null;
     }
     setTimeout(() => { this.show = false; }, 3000);
   }

@@ -1,14 +1,14 @@
 <div class="container">
   <div class="child">
-    <button
+    <!-- <button
       *ngIf="!running"
       class="btn btn-primary"
       type="button"
       (click)="startTest(); click = true"
     >
       Start Test
-    </button>
-    <button
+    </button> -->
+    <!-- <button
       class="btn btn-primary btn-sm"
       type="button"
       (click)="showAdvance()"
@@ -16,22 +16,31 @@
       [disabled]="click"
     >
       Advance Options
-  </button>
-  <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
-    <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
-    <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
-  </div>
-  <div class="child" *ngIf="advance">
+  </button> -->
+
+  <div class="child" *ngIf="!running">
     <form [formGroup]="advanceForm">
      <mat-form-field>
         <mat-label>Test plan name </mat-label>
-        <input matInput type="text" id="planName" value="" formControlName="planName" /><br />
+        <input matInput type="text" id="planName" formControlName="planName" /><br />
       </mat-form-field>
-      <mat-form-field>
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Duration or Loops
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button class="dropdown-item" (click)="toggleLoopsOrDuration()">Duration</button>
+          <button class="dropdown-item" (click)="toggleLoopsOrDuration()">Number Of Loops</button>
+        </div>
+      </div>
+      <div *ngIf="!showDuration">
+        <mat-form-field>
         <mat-label>Number of Loops </mat-label>
         <input matInput type="number" id="loops" min="0" max="200" formControlName="loops" /><br />
       </mat-form-field>
-      <mat-form-field>
+      </div>
+      <div *ngIf="showDuration">
+        <mat-form-field>
         <mat-label>Duration (in Seconds) </mat-label>
         <input
           matInput
@@ -40,8 +49,12 @@
           min="0"
           max="200"
           formControlName="duration"
+          required
         /><br />
       </mat-form-field>
+      </div>
+      
+      
       <mat-form-field>
         <mat-label>Number of threads </mat-label>
         <input
@@ -70,8 +83,28 @@
         >
       </section>
     </form>
+    <div class="float-left">
+      <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
+      <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
+      <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
+    </div>
+    </div>
+    <div class="float-right">
+        <button
+        *ngIf="!running"
+        class="btn btn-outline-dark"
+        type="button"
+        (click)="startTest(); click = true"
+      >
+        Start Test
+      </button>
+    </div>
   </div>
+
   <div *ngIf="running">
+    <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
+      <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
+      <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
     <table>
       <caption>Load Test Configuration</caption>
       <th scope="col">Load Test Settings</th>
@@ -81,11 +114,11 @@
           LTC.testPlanName
         }}
       </tr>
-      <tr>
+      <tr *ngIf="!showDuration">
         Number of Loops :
         <strong>{{ LTC.loops }} Loops</strong>
       </tr>
-      <tr>
+      <tr *ngIf="showDuration">
         Length of tests :<strong> {{ LTC.duration }} seconds</strong>
       </tr>
       <tr>

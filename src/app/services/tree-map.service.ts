@@ -16,8 +16,8 @@ export class TreeMapService {
 
   currentDashData: Observable<ResultSummary[]> = this.currentDashDataSource.asObservable();
 
-  async updateData() {
-    const responseData = await this.http.get<SwaggerSummary>('http://localhost:8083/Docutest/swaggersummary/22').toPromise();
+  async updateData(id: number) {
+    const responseData = await this.http.get<SwaggerSummary>(`http://localhost:8083/Docutest/swaggersummary/${id}`).toPromise();
     this.treeMapDataSource.next(responseData);
   }
 

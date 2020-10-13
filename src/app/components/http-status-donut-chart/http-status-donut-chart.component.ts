@@ -56,14 +56,10 @@ export class HttpStatusDonutChartComponent implements OnInit {
   createColors() {
     this.color = d3.scaleOrdinal()
       .domain(this.dummy_data.map((d) => d.abs.toString()))
-      .range(['#39DB80', '#C0EBCB']);
+      .range(['#39DB80', ' #FD23C0']);
   }
 
   ngOnInit() {
-    this.dummy_data = [
-      { name: 'A', value: -4, abs: 4 },
-      { name: 'B', value: -16, abs: 16 },
-    ];
     this.createSvg();
     this.createColors();
     this.drawChart();

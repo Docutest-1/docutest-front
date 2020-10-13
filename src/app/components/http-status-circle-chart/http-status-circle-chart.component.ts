@@ -100,7 +100,7 @@ export class HttpStatusCircleChartComponent implements AfterViewInit {
 
         this.pieChartData.push({
           colorIndex: 2,
-          value: 100 - 90,
+          value: 100 - Number.parseFloat(currData.successFailPercentage.toFixed(2)),
           label: '400/500 status codes'
         });
       }

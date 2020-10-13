@@ -18,7 +18,7 @@ export class EndpointOverviewComponent implements OnInit {
       if (data) {
         const currData = data[0];
         const responseAvg = { name: 'Response \nAverage', value: `${currData.responseAvg} ms` };
-        const successFailPercentage = { name: 'Success \nPercentage', value: `${currData.successFailPercentage} %` };
+        const successFailPercentage = { name: 'Success \nPercentage', value: `${currData.successFailPercentage % 1 !== 0 ? currData.successFailPercentage.toFixed(2) : currData.successFailPercentage} %` };
         const failCount = { name: 'Total \nFailures', value: `${currData.failCount}` };
         const responseMax = { name: 'Requests \nper Second', value: `${currData.reqPerSec.toPrecision(2)}` };
 
