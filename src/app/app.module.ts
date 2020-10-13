@@ -23,6 +23,7 @@ import * as fromGraphRoute from './state/graph-route/graph-route.reducer';
 import { DemoTableComponent } from './components/demo-table/demo-table.component';
 import { ResultsSummaryComponent } from './pages/results-summary/results-summary.component';
 import { UploadComponent } from './pages/upload/upload.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UploadComponent } from './pages/upload/upload.component';
     DemoTableComponent,
     ResultsSummaryComponent,
     UploadComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
