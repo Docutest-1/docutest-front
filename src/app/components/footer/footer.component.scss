@@ -1,7 +1,14 @@
 footer{
-    background-color: #474C55;
-    postion: absolute;
+    position:absolute;
+    bottom:0;
+    width:100%;  /* Height of the footer */
+    padding: 25px;
+    background-image: linear-gradient( rgb( 72, 76, 86), rgb(185, 185, 186));
 }
-.container {
-    margin-left: 1em;
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 13%;
 }
+
