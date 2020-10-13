@@ -84,7 +84,6 @@
       </section>
     </form>
     <div class="float-left">
-      <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
       <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
       <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
     </div>
@@ -102,11 +101,9 @@
   </div>
 
   <div *ngIf="running">
-    <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
       <p *ngIf="running">Test has been running for : {{ time }} seconds</p>
       <mat-progress-bar *ngIf="running" mode="buffer"></mat-progress-bar>
     <table>
-      <caption>Load Test Configuration</caption>
       <th scope="col">Load Test Settings</th>
       <tr *ngIf="advance">
         Test Plan Name :
@@ -143,4 +140,5 @@
       {{ msg }}
     </div>
   </div>
+  <button class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
 </div>
