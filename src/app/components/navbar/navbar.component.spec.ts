@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
@@ -8,7 +9,8 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavbarComponent]
+      declarations: [NavbarComponent],
+      imports: [HttpClientModule]
     })
       .compileComponents();
   }));
@@ -21,5 +23,17 @@ describe('NavbarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set id in session storage', () => {
+    spyOn(NavbarComponent, 'reloadPage'); // don't actually want to reload anything
+
+    const n = 10;
+    component.id = n;
+
+    component.searchSummary();
+
+    expect(parseInt(sessionStorage.getItem('swaggerSummaryId'), 10)).toEqual(n);
+    expect(NavbarComponent.reloadPage).toHaveBeenCalled();
   });
 });

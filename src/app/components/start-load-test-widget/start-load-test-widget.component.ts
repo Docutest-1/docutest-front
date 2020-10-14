@@ -84,7 +84,6 @@ export class StartLoadTestWidgetComponent {
     } else {
       this.submit();
       this.myEvent.emit(true);
-      console.log('event emitted');
     }
     setTimeout(() => {
       this.checkEta();

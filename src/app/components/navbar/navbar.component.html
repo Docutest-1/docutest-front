@@ -15,7 +15,10 @@
     >
       Actions
     </button>
-
+    
+    <input type="number" [(ngModel)]="id" placeholder="Summary ID" />
+    <button class="btn btn-primary" (click)="searchSummary()">Search</button>
+    
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" routerLink="upload">Upload</a>
       <a class="dropdown-item" routerLink="results-summary">Result Summary Page</a>
