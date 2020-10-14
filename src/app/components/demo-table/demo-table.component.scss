@@ -1,22 +1,21 @@
-.table
-{
+.table {
   margin-left: auto;
   margin-right: auto;
-//   // margin: none
+  border-color: #474C55;
 } 
 
+h2 {
+  color: #474C55;
+  text-align: center;
+}
 
+table {
+  border-color: #474C55;
+  color: white;
+  box-shadow: 0 8px 10px -5px #474C55;
+}
 
-// .table .config-table {
-//     margin: 0;
-//     max-width: 50%;
-//   } 
-// .table .summary-table {
-//     margin:0;
-//     max-width: 75%;
-//   }
-
-
-// .tables-container {
-//   width: 100%;
-// }
+thead {
+  background-color: #474C55;
+  border-color: #474C55;
+}
